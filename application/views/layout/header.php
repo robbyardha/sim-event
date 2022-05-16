@@ -15,6 +15,10 @@
     <!-- Core css -->
     <link href="<?= base_url() ?>assets/css/app.min.css" rel="stylesheet">
 
+    <!-- INSTASCAN JS -->
+    <script type="text/javascript" src="<?= base_url() ?>assets/vendors/instascan/instascan.min.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>assets/vendors/jquery/dist/jquery.js" rel="stylesheet"></script>
+
 </head>
 
 <body>

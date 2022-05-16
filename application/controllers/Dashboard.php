@@ -78,4 +78,14 @@ class Dashboard extends CI_Controller
             // redirect('dashboard/qrexample');
         }
     }
+
+    public function qrscan()
+    {
+        $data['title'] = "Dashboard - SIM Event";
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/qrscan', $data);
+        $this->load->view('layout/footer', $data);
+    }
 }
