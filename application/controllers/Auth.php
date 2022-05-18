@@ -126,11 +126,15 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     // $data = $user;
                     unset($user['password']);
-                    $user['user_id'] = $user['id'];
-                    $user['user_id'] = $user['nama'];
-                    $user['user_id'] = $user['image'];
+                    $data = [
+                        'email' => $user['email'],
+                        'username' => $user['username'],
+                        'nama' => $user['nama'],
+                        'role_id' => $user['role_id'],
+                        'user_id' => $user['id']
+                    ];
                     unset($user['id']);
-                    $data = $user;
+                    // $data = $user;
                     $this->session->set_userdata($data);
                     redirect('dashboard');
                 } else {

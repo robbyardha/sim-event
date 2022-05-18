@@ -33,20 +33,28 @@
                                     </label>
                                     <div class="form-group input-affix flex-column">
                                         <label class="d-none">Password</label>
-                                        <input formcontrolname="password" name="password" class="form-control" type="password">
+                                        <input name="password" class="form-control" type="password">
                                         <?= form_error('password', '<small class="text-danger">', '</small>') ?>
-                                        <i class="suffix-icon feather cursor-pointer text-dark icon-eye" id="showpass" onclick="showHidePass()" ng-reflect-ng-class="icon-eye"></i>
+                                        <!-- <i class="far fa-eye" id="togglePassword"></i> -->
+                                        <!-- <i class="suffix-icon feather cursor-pointer text-dark icon-eye" id="togglePassword" onclick="showHidePass()" ng-reflect-ng-class="icon-eye"></i> -->
+                                        <div class="form-check mt-1">
+                                            <input class="form-check-input" type="checkbox" id="showpass" onclick="showHidePassLog()">
+                                            <script>
+                                                function showHidePassLog() {
+                                                    var x = document.getElementById("password");
+                                                    if (x.type === "password") {
+                                                        x.type = "text";
+                                                    } else {
+                                                        x.type = "password";
+                                                    }
+                                                }
+                                            </script>
+                                            <label class="form-check-label ms-2" for="showpass">
+                                                Show Password
+                                            </label>
+                                        </div>
                                     </div>
-                                    <script>
-                                        function showHidePass() {
-                                            var x = document.getElementById("password");
-                                            if (x.type === "password") {
-                                                x.type = "text";
-                                            } else {
-                                                x.type = "password";
-                                            }
-                                        }
-                                    </script>
+
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Log In</button>
                             </form>

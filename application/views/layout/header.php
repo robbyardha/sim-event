@@ -12,12 +12,19 @@
     <!-- page css -->
     <link href="<?= base_url() ?>assets/vendors/apexcharts/dist/apexcharts.css" rel="stylesheet">
 
+    <!-- Daterange picker -->
+    <link href="<?= base_url() ?>assets/vendors/daterange/daterangepicker.css" rel="stylesheet">
+
     <!-- Core css -->
     <link href="<?= base_url() ?>assets/css/app.min.css" rel="stylesheet">
 
     <!-- INSTASCAN JS -->
     <script type="text/javascript" src="<?= base_url() ?>assets/vendors/instascan/instascan.min.js"></script>
+    <!-- JQUERY -->
     <script type="text/javascript" src="<?= base_url() ?>assets/vendors/jquery/dist/jquery.js" rel="stylesheet"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 </head>
 
