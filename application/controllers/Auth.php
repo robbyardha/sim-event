@@ -115,6 +115,8 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
 
         $user = $this->db->get_where('users', ['email' => $email])->row_array();
+        $username = $this->db->get_where('users', ['username' => $email])->row_array();
+
         //user ada
         if ($user) {
             //is_active
@@ -141,9 +143,33 @@ class Auth extends CI_Controller
                 email Belum aktif, hubungi Admin! </div>');
                 redirect('auth');
             }
+        } else if ($username) {
+            if ($username['is_active'] == 1) {
+
+                //password verify
+                if (password_verify($password, $username['password'])) {
+                    // $data = $user;
+                    unset($username['password']);
+                    $username['user_id'] = $username['id'];
+                    $username['user_id'] = $username['nama'];
+                    $username['user_id'] = $username['image'];
+                    unset($username['id']);
+                    $data = $username;
+                    $this->session->set_userdata($data);
+                    redirect('dashboard');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    email/Username/Password salah </div>');
+                    redirect('auth');
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                username Belum aktif, hubungi Admin! </div>');
+                redirect('auth');
+            }
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            email tidak ada </div>');
+            email/username tidak ada </div>');
             redirect('auth');
         }
     }
@@ -156,6 +182,6 @@ class Auth extends CI_Controller
         $this->session->all_userdata();
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Kamu berhasil logout </div>');
-        redirect('admin/auth');
+        redirect('auth');
     }
 }
