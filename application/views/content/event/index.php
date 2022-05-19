@@ -46,13 +46,38 @@
                                     <td><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></td>
                                     <td><?= $ev['penyelenggara'] ?></td>
                                     <td>
-                                        <a href="javascript:;" data-id="<?php echo $ev['id'] ?>" data-nama-event="<?php echo $ev['nama_event'] ?>" data-tanggalawal-event="<?php echo $ev['tanggal_awal'] ?>" data-tanggalakhir-event="<?php echo $ev['tanggal_akhir'] ?>" data-waktumulai-event="<?php echo $ev['waktu_mulai'] ?>" data-waktuberakhir-event="<?php echo $ev['waktu_berakhir'] ?>" data-penyelenggara="<?php echo $ev['penyelenggara'] ?>" data-toggle="modal" data-target="#edit-data">
-                                            <button data-toggle="modal" data-target="#ubah-data" class="btn btn-info">Ubah</button>
-                                        </a>
-                                        <a href="" class="btn btn-sm btn-success">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger">Hapus</a>
+
+                                        <a href="<?= base_url('event/edit/') ?><?= $ev['id'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                        <a data-bs-toggle="modal" data-bs-target="#hapus_event<?= $ev['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+
                                     </td>
                                 </tr>
+
+                                <!-- MODAL HAPUS EVENT -->
+                                <div class="modal fade" id="hapus_event<?= $ev['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Event</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form class="form-horizontal" method="POST" action="<?= base_url('event/hapus')  ?>">
+                                                <div class="modal-body">
+                                                    <div class="modal-body">
+                                                        <p>Anda yakin akan menghapus <b><?= $ev['nama_event']; ?></b></p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="id" value="<?= $ev['id']; ?>">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             <?php endforeach ?>
                         </tbody>
                         <tfoot>

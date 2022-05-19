@@ -93,7 +93,7 @@ class Event extends CI_Controller
             redirect('event/index');
         }
     }
-    public function edit()
+    public function edit($id)
     {
         $this->form_validation->set_rules(
             'nama_event',
@@ -153,17 +153,28 @@ class Event extends CI_Controller
         );
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Event - SIM Event";
+            $data['event'] = $this->Event_model->getByid($id);
+            // var_dump($data['event']);
+            // die;
             $this->load->view('layout/header', $data);
             $this->load->view('layout/navbar', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('content/event/tambah', $data);
+            $this->load->view('content/event/edit', $data);
             $this->load->view('layout/footer', $data);
         } else {
-            $this->Event_model->tambah();
+            $this->Event_model->edit();
             // var_dump($this->db->last_query());
             // die;
-            $this->session->set_flashdata('message', 'Ditambahkan');
+            $this->session->set_flashdata('message', 'Diubah');
             redirect('event/index');
         }
+    }
+
+    public function hapus()
+    {
+        $id = htmlspecialchars($this->input->post('id'));
+        $this->Event_model->hapus($id);
+        $this->session->set_flashdata('message', 'Dihapus');
+        redirect('event');
     }
 }
