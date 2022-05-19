@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 07:46 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: May 18, 2022 at 08:25 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,19 +35,9 @@ CREATE TABLE `event` (
   `tanggal_akhir` date NOT NULL,
   `waktu_mulai` time NOT NULL,
   `waktu_berakhir` time NOT NULL,
-  `status` varchar(85) DEFAULT NULL,
+  `status` varchar(85) NOT NULL,
   `penyelenggara` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `event`
---
-
-INSERT INTO `event` (`id`, `nama_event`, `deskripsi_event`, `tanggal_awal`, `tanggal_akhir`, `waktu_mulai`, `waktu_berakhir`, `status`, `penyelenggara`) VALUES
-(1, 'asdasd', 'asdasd', '2022-05-19', '2022-05-28', '00:00:00', '00:00:00', '', 'asdasd'),
-(2, 'sadasd', 'asdas', '2022-05-25', '2022-05-27', '12:00:00', '12:00:00', NULL, 'asdasd'),
-(3, 'tes2', 'detsdfds', '2022-05-19', '2022-05-18', '15:43:00', '17:43:00', NULL, 'dsfdsf'),
-(4, 'tesssssss', 'sadddddd', '2022-05-25', '2022-05-28', '07:00:00', '12:00:00', NULL, 'sad');
 
 -- --------------------------------------------------------
 
@@ -174,7 +164,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kehadiran_event`
