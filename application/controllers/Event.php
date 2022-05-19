@@ -93,4 +93,77 @@ class Event extends CI_Controller
             redirect('event/index');
         }
     }
+    public function edit()
+    {
+        $this->form_validation->set_rules(
+            'nama_event',
+            'Nama Event',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'deskripsi_event',
+            'Deskripsi Event',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'tanggal_awal',
+            'Tanggal Awal',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'tanggal_akhir',
+            'Tanggal Akhir',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'waktu_mulai',
+            'Waktu Mulai',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'waktu_berakhir',
+            'Waktu Akhir',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
+            'penyelenggara',
+            'Penyelenggara',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Event - SIM Event";
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/navbar', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('content/event/tambah', $data);
+            $this->load->view('layout/footer', $data);
+        } else {
+            $this->Event_model->tambah();
+            // var_dump($this->db->last_query());
+            // die;
+            $this->session->set_flashdata('message', 'Ditambahkan');
+            redirect('event/index');
+        }
+    }
 }

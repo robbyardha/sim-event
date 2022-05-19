@@ -45,7 +45,13 @@
                                     <td><?= $ev['tanggal_awal'] ?> - <?= $ev['tanggal_akhir'] ?></td>
                                     <td><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></td>
                                     <td><?= $ev['penyelenggara'] ?></td>
-                                    <td><a href="" class="btn btn-sm btn-success">Edit</a> <a href="" class="btn btn-sm btn-danger">Hapus</a></td>
+                                    <td>
+                                        <a href="javascript:;" data-id="<?php echo $ev['id'] ?>" data-nama-event="<?php echo $ev['nama_event'] ?>" data-tanggalawal-event="<?php echo $ev['tanggal_awal'] ?>" data-tanggalakhir-event="<?php echo $ev['tanggal_akhir'] ?>" data-waktumulai-event="<?php echo $ev['waktu_mulai'] ?>" data-waktuberakhir-event="<?php echo $ev['waktu_berakhir'] ?>" data-penyelenggara="<?php echo $ev['penyelenggara'] ?>" data-toggle="modal" data-target="#edit-data">
+                                            <button data-toggle="modal" data-target="#ubah-data" class="btn btn-info">Ubah</button>
+                                        </a>
+                                        <a href="" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -69,6 +75,8 @@
     </div>
 
 </div>
+
+
 <!-- Content END -->
 
 <!-- <script>
