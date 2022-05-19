@@ -84,6 +84,12 @@
 <script src="<?= base_url() ?>assets/vendors/daterange/moment.min.js"></script>
 <!-- Daterange -->
 <script src="<?= base_url() ?>assets/vendors/daterange/daterangepicker.js"></script>
+<!-- FLATPICKR (DATE) -->
+<script src="<?= base_url() ?>assets/vendors/flatpickr/flatpickr.js"></script>
+
+<!-- DATATABLES -->
+<script src="<?= base_url() ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
 
 <!-- page js -->
 <script src="<?= base_url() ?>assets/vendors/apexcharts/dist/apexcharts.min.js"></script>
@@ -93,18 +99,36 @@
 <script src="<?= base_url() ?>assets/js/app.min.js"></script>
 
 <script>
-    $('#range').daterangepicker({
-        "startDate": "05/13/2022",
-        "endDate": "05/19/2022"
-    }, function(start, end, label) {
-        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    $(function() {
+        $("#tgl").daterangepicker({
+            locale: {
+                format: 'DD/MMM/YYYY',
+                singleDatePicker: true,
+                showDropdowns: true
+            }
+        });
     });
+</script>
 
-    var today = new Date();
+<script>
+    $(".flatpickr").flatpickr({
+        dateFormat: "Y-m-d"
+    });
+    $(".timepickr").flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i:s",
+        time_24hr: true,
+    });
+</script>
 
-    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-    alert(date);
-    $('#tgl').data('daterangepicker').setStartDate('03/01/2014');
+<script>
+    $('.data-table').DataTable({
+        'columnDefs': [{
+            'orderable': false,
+            'targets': 0
+        }]
+    });
 </script>
 
 </body>
