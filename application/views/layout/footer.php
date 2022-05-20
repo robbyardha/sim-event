@@ -86,6 +86,8 @@
 <script src="<?= base_url() ?>assets/vendors/daterange/daterangepicker.js"></script>
 <!-- FLATPICKR (DATE) -->
 <script src="<?= base_url() ?>assets/vendors/flatpickr/flatpickr.js"></script>
+<!-- SELECT2 -->
+<script src="<?= base_url() ?>assets/vendors/select2/select2.js"></script>
 
 <!-- DATATABLES -->
 <script src="<?= base_url() ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
@@ -128,6 +130,12 @@
             'orderable': false,
             'targets': 0
         }]
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
     });
 </script>
 
