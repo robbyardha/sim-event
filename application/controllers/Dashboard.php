@@ -6,7 +6,7 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        // var_dump($this->session->userdata('username'));
+        // var_dump($this->session->userdata());
         // die;
         if (!$this->session->userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Please Login First </div>');

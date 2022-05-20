@@ -155,11 +155,11 @@ class Auth extends CI_Controller
                     // $data = $user;
                     unset($username['password']);
                     $data = [
-                        'email' => $user['email'],
-                        'username' => $user['username'],
-                        'nama' => $user['nama'],
-                        'role_id' => $user['role_id'],
-                        'user_id' => $user['id']
+                        'email' => $username['email'],
+                        'username' => $username['username'],
+                        'nama' => $username['nama'],
+                        'role_id' => $username['role_id'],
+                        'user_id' => $username['id']
                     ];
                     // $username['user_id'] = $username['id'];
                     // $username['user_id'] = $username['nama'];
