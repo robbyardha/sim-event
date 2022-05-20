@@ -54,6 +54,7 @@
                                     <?= form_error('penyelenggara', '<small class="text-danger">', '</small>') ?>
 
                                 </div>
+                                <a href="<?= base_url('event') ?>" class="btn btn-secondary me-2">Batal</a>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                             </form>
                         </div>

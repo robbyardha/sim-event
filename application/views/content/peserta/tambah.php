@@ -43,7 +43,7 @@
                                     <input type="text" class="form-control" name="no_tlp" id="no_tlp" placeholder="6281246549498">
                                     <?= form_error('no_tlp', '<small class="text-danger">', '</small>') ?>
                                 </div>
-
+                                <a href="<?= base_url('peserta') ?>" class="btn btn-secondary me-2">Batal</a>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                             </form>
                         </div>

@@ -173,7 +173,7 @@
                                 <span>Support</span>
                             </div>
                         </a>
-                        <a href="javascript:void(0)" class="dropdown-item">
+                        <a href="<?= base_url('auth/logout') ?>" class="dropdown-item">
                             <div class="d-flex align-items-center"><i class="font-size-lg me-2 feather icon-power"></i>
                                 <span>Sign Out</span>
                             </div>

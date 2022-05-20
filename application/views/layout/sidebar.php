@@ -10,13 +10,16 @@
          </div>
      </div>
      <ul class="nav-menu">
-         <li class="nav-menu-item router-link-active">
-             <a href="index.html">
+         <li class="nav-group-title">Administrator Page</li>
+         <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "dashboard" || $this->uri->segment(1) == "Dashboard") {
+                                                    echo "active";
+                                                } ?>">
+             <a href="<?= base_url('dashboard') ?>">
                  <i class="feather icon-home"></i>
                  <span class="nav-menu-item-title">Dashboard</span>
              </a>
          </li>
-         <li class="nav-group-title">APPS</li>
+         <!-- <li class="nav-group-title">APPS</li>
          <li class="nav-menu-item">
              <a href="v-mail.html">
                  <i class="feather icon-mail"></i>
@@ -34,15 +37,40 @@
                  <i class="feather icon-calendar"></i>
                  <span class="nav-menu-item-title">Calendar</span>
              </a>
-         </li>
-         <li class="nav-group-title">USER INTERFACE</li>
+         </li> -->
+         <li class="nav-group-title">Master Data</li>
          <li class="nav-submenu">
-             <a class="nav-submenu-title">
+             <a class="nav-submenu-title ">
                  <i class="feather icon-box"></i>
-                 <span>UI Elements</span>
+                 <span>Master Data</span>
                  <i class="nav-submenu-arrow"></i>
              </a>
              <ul class="nav-menu menu-collapse">
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Users" || $this->uri->segment(1) == "users") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('users') ?>">Users</a>
+                 </li>
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Event" || $this->uri->segment(1) == "event") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('event') ?>">Event</a>
+                 </li>
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Peserta" || $this->uri->segment(1) == "peserta") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('peserta') ?>">Peserta</a>
+                 </li>
+
+             </ul>
+
+
+             <!-- <a class="nav-submenu-title">
+                 <i class="feather icon-box"></i>
+                 <span>UI Elements</span>
+                 <i class="nav-submenu-arrow"></i>
+             </a> -->
+             <!-- <ul class="nav-menu menu-collapse">
                  <li class="nav-menu-item">
                      <a href="v-avatar.html">Avatar</a>
                  </li>
@@ -67,9 +95,55 @@
                  <li class="nav-menu-item">
                      <a href="v-typography.html">Typography</a>
                  </li>
+             </ul> -->
+         </li>
+
+         <li class="nav-group-title">Kehadiran Event</li>
+         <li class="nav-submenu">
+             <a class="nav-submenu-title ">
+                 <i class="feather icon-radio"></i>
+                 <span>Kehadiran</span>
+                 <i class="nav-submenu-arrow"></i>
+             </a>
+             <ul class="nav-menu menu-collapse">
+
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Event" || $this->uri->segment(1) == "event") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('event') ?>">Event</a>
+                 </li>
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Peserta" || $this->uri->segment(1) == "peserta") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('peserta') ?>">Peserta</a>
+                 </li>
+
              </ul>
          </li>
+
+         <li class="nav-group-title">Laporan</li>
          <li class="nav-submenu">
+             <a class="nav-submenu-title ">
+                 <i class="feather icon-file-text"></i>
+                 <span>Laporan</span>
+                 <i class="nav-submenu-arrow"></i>
+             </a>
+             <ul class="nav-menu menu-collapse">
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Event" || $this->uri->segment(1) == "event") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('event') ?>">Event</a>
+                 </li>
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Peserta" || $this->uri->segment(1) == "peserta") {
+                                                            echo "active";
+                                                        } ?> ">
+                     <a href="<?= base_url('peserta') ?>">Peserta</a>
+                 </li>
+
+             </ul>
+         </li>
+
+         <!-- <li class="nav-submenu">
              <a class="nav-submenu-title">
                  <i class="feather icon-package"></i>
                  <span>Components</span>
@@ -210,7 +284,7 @@
                      <a href="error-v2.html">Error 2</a>
                  </li>
              </ul>
-         </li>
+         </li> -->
      </ul>
  </div>
  <!-- Side Nav END -->

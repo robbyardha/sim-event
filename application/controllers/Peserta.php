@@ -160,4 +160,23 @@ class Peserta extends CI_Controller
         $this->session->set_flashdata('message', 'Dihapus');
         redirect('peserta');
     }
+
+    public function import()
+    {
+        $data['title'] = "Peserta - SIM Event";
+        $data['event'] = $this->Event_model->getAll();
+        // var_dump($data['pesertajoinevent']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/peserta/import', $data);
+        $this->load->view('layout/footer', $data);
+    }
+
+    public function downloadFormat()
+    {
+        $this->load->helper('download');
+        force_download('assets/file_upload/format_country.xlsx', NULL);
+    }
 }

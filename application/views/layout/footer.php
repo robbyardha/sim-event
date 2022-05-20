@@ -93,6 +93,9 @@
 <script src="<?= base_url() ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
 
+<!-- DROPIFY -->
+<script src="<?= base_url() ?>assets/vendors/dropify/js/dropify.js"></script>
+
 <!-- page js -->
 <script src="<?= base_url() ?>assets/vendors/apexcharts/dist/apexcharts.min.js"></script>
 <script src="<?= base_url() ?>assets/js/pages/dashboard.js"></script>
@@ -136,6 +139,17 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
+    });
+</script>
+
+<script>
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click to upload',
+            'replace': 'Drag and drop or click to replace',
+            'remove': 'Remove',
+            'error': 'Ooops, something wrong happended.'
+        }
     });
 </script>
 
