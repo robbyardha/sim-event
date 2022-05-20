@@ -1,0 +1,5 @@
+*nama data nama peserta antara format users dan format peserta
+*data nama pada kedua format tersebut harus sama agar dapat menampilkan data
+
+
+*nama event dengan event yang dibuat pada format peserta harus sama

@@ -172,11 +172,13 @@ class Peserta extends CI_Controller
         $this->load->view('layout/sidebar', $data);
         $this->load->view('content/peserta/import', $data);
         $this->load->view('layout/footer', $data);
+        $this->load->helper('form');
+        $this->Peserta_model->import();
     }
 
     public function downloadFormat()
     {
         $this->load->helper('download');
-        force_download('assets/file_upload/format_country.xlsx', NULL);
+        force_download('assets/document/format_peserta.xlsx', NULL);
     }
 }
