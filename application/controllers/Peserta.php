@@ -91,85 +91,73 @@ class Peserta extends CI_Controller
     public function edit($id)
     {
         $this->form_validation->set_rules(
-            'nama_event',
-            'Nama Event',
+            'id',
+            'ID',
             'required',
             [
                 'required' => "Field ini harus diisi"
             ]
         );
         $this->form_validation->set_rules(
-            'deskripsi_event',
-            'Deskripsi Event',
+            'event_id',
+            'Event',
             'required',
             [
                 'required' => "Field ini harus diisi"
             ]
         );
         $this->form_validation->set_rules(
-            'tanggal_awal',
-            'Tanggal Awal',
+            'nama',
+            'Nama',
             'required',
             [
                 'required' => "Field ini harus diisi"
             ]
         );
         $this->form_validation->set_rules(
-            'tanggal_akhir',
-            'Tanggal Akhir',
+            'asal',
+            'Asal',
             'required',
             [
                 'required' => "Field ini harus diisi"
             ]
         );
         $this->form_validation->set_rules(
-            'waktu_mulai',
-            'Waktu Mulai',
-            'required',
-            [
-                'required' => "Field ini harus diisi"
-            ]
-        );
-        $this->form_validation->set_rules(
-            'waktu_berakhir',
-            'Waktu Akhir',
-            'required',
-            [
-                'required' => "Field ini harus diisi"
-            ]
-        );
-        $this->form_validation->set_rules(
-            'penyelenggara',
-            'Penyelenggara',
+            'no_tlp',
+            'No Tlp',
             'required',
             [
                 'required' => "Field ini harus diisi"
             ]
         );
         if ($this->form_validation->run() == FALSE) {
-            $data['title'] = "Event - SIM Event";
-            $data['event'] = $this->Event_model->getByid($id);
-            // var_dump($data['event']);
+            $data['title'] = "Peserta - SIM Event";
+            $data['pesertaid'] = $this->Peserta_model->getById($id);
+            $data['pesertajoinevent'] = $this->Peserta_model->joinWithEventId($id);
+
+            $data['eventid'] = $this->Event_model->getByid($id);
+            $data['event'] = $this->Event_model->getAll();
+            // var_dump($data['pesertajoinevent']);
             // die;
             $this->load->view('layout/header', $data);
             $this->load->view('layout/navbar', $data);
             $this->load->view('layout/sidebar', $data);
-            $this->load->view('content/event/edit', $data);
+            $this->load->view('content/peserta/edit', $data);
             $this->load->view('layout/footer', $data);
         } else {
-            $this->Event_model->edit();
+            $this->Peserta_model->edit();
             // var_dump($this->db->last_query());
             // die;
             $this->session->set_flashdata('message', 'Diubah');
-            redirect('event/index');
+            redirect('peserta/index');
         }
     }
 
     public function hapus()
     {
         $id = htmlspecialchars($this->input->post('id'));
-        $this->Event_model->hapus($id);
+        $this->Peserta_model->hapus($id);
         $this->session->set_flashdata('message', 'Dihapus');
-        redirect('event');
+        redirect('peserta');
     }
 }

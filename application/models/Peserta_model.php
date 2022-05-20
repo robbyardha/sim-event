@@ -7,11 +7,29 @@ class Peserta_model extends CI_Model
         return $this->db->get('peserta_event')->result_array();
     }
 
+    public function getById($id)
+    {
+        if($id == NULL){
+            return $this->db->get('peserta_event')->result_array();
+        }else{
+            return $this->db->get_where('peserta_event', ['id' => $id])->row_array();
+        }
+    }
+
     public function joinWithEvent()
     {
         $this->db->select("peserta_event.id, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
         $this->db->from("peserta_event");
         $this->db->join("event", "event.id = peserta_event.event_id");
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+    public function joinWithEventId($id)
+    {
+        $this->db->select("peserta_event.id, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
+        $this->db->from("peserta_event");
+        $this->db->join("event", "event.id = peserta_event.event_id");
+        $this->db->where('peserta_event.id', $id);
         $result = $this->db->get();
         return $result->result_array();
     }
@@ -67,4 +85,26 @@ class Peserta_model extends CI_Model
         // die;
         $this->db->insert('peserta_event', $data);
     }
+
+    public function edit()
+    {
+        $id = htmlspecialchars($this->input->post('id'));
+        $event_id = htmlspecialchars($this->input->post('event_id'));
+        $nama = htmlspecialchars($this->input->post('nama'));
+        $asal = htmlspecialchars($this->input->post('asal'));
+        $no_tlp = htmlspecialchars($this->input->post('no_tlp'));
+        $this->db->set('event_id', $event_id);
+        $this->db->set('nama', $nama);
+        $this->db->set('asal', $asal);
+        $this->db->set('no_tlp', $no_tlp);
+        $this->db->where('id', $id);
+        $this->db->update('peserta_event');
+    }
+
+    public function hapus($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('peserta_event');
+    }
+
 }

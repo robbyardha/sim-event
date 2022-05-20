@@ -47,28 +47,28 @@
                                     <td><?= $pes['nama_event'] ?></td>
                                     <td><?= $pes['tanggal_daftar'] ?> </td>
                                     <td><?= $pes['nama'] ?></td>
-                                    <td><img src="<?= $pes['qr_img'] ?>" alt="" srcset=""></td>
+                                    <td><img class="img-fluid" src="<?= base_url('assets/dataqr/') ?><?=$pes['qr_img'] ?> ?>" alt="" srcset=""></td>
 
                                     <td>
 
-                                        <a href="<?= base_url('event/edit/') ?><?= $pes['id'] ?>" class="btn btn-sm btn-success">Edit</a>
-                                        <a data-bs-toggle="modal" data-bs-target="#hapus_event<?= $pes['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="<?= base_url('peserta/edit/') ?><?= $pes['id'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                        <a data-bs-toggle="modal" data-bs-target="#hapus_peserta<?= $pes['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
 
                                     </td>
                                 </tr>
 
                                 <!-- MODAL HAPUS EVENT -->
-                                <div class="modal fade" id="hapus_event<?= $pes['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="hapus_peserta<?= $pes['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Hapus Event</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form class="form-horizontal" method="POST" action="<?= base_url('event/hapus')  ?>">
+                                            <form class="form-horizontal" method="POST" action="<?= base_url('peserta/hapus')  ?>">
                                                 <div class="modal-body">
                                                     <div class="modal-body">
-                                                        <p>Anda yakin akan menghapus <b><?= $pes['nama_event']; ?></b></p>
+                                                        <p>Anda yakin akan menghapus <b><?= $pes['nama']; ?></b></p>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">

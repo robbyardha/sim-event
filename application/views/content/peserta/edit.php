@@ -18,42 +18,34 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form method="POST">
+                                <input type="hidden" class="form-control" id="id" name="id" placeholder="Wisuda" value="<?= $pesertajoinevent[0]['id'] ?>">
+                                <?php //var_dump($event);die; ?>
                                 <div class="mb-3">
-                                    <label for="nama_event" class="form-label">Nama Event</label>
-                                    <input type="hidden" class="form-control" id="id" name="id" placeholder="Wisuda" value="<?= $event['id'] ?>">
-                                    <input type="text" class="form-control" id="nama_event" name="nama_event" placeholder="Wisuda" value="<?= $event['nama_event'] ?>">
-                                    <?= form_error('nama_event', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="deskripsi_event">Deskripsi Event</label>
-                                    <textarea name="deskripsi_event" id="deskripsi_event" cols="30" rows="3" class="form-control" placeholder="Wisuda adalah kegiatan yang sakral"><?= $event['deskripsi_event'] ?></textarea>
-                                    <?= form_error('deskripsi_event', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tanggal_awal" class="form-label">Tanggal Awal Event</label>
-                                    <input type="text" class="form-control flatpickr" name="tanggal_awal" id="tanggal_awal" value="<?= $event['tanggal_awal'] ?>" placeholder="2022-05-24">
-                                    <?= form_error('tanggal_awal', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="tanggal_akhir" class="form-label">Tanggal Akhir Event</label>
-                                    <input type="text" class="form-control flatpickr" name="tanggal_akhir" id="tanggal_akhir" value="<?= $event['tanggal_akhir'] ?>" placeholder="2022-05-24">
-                                    <?= form_error('tanggal_akhir', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="waktu_mulai" class="form-label">Waktu Mulai Event</label>
-                                    <input type="text" class="form-control timepickr" name="waktu_mulai" id="waktu_mulai" value="<?= $event['waktu_mulai'] ?>" placeholder="05:00:00">
-                                    <?= form_error('waktu_mulai', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="waktu_berakhir" class="form-label">Waktu Akhir Event</label>
-                                    <input type="text" class="form-control timepickr" name="waktu_berakhir" id="waktu_berakhir" value="<?= $event['waktu_berakhir'] ?>" placeholder="05:00:00">
-                                    <?= form_error('waktu_berakhir', '<small class="text-danger">', '</small>') ?>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="penyelenggara" class="form-label">Penyelenggara</label>
-                                    <input type="text" class="form-control" name="penyelenggara" id="penyelenggara" value="<?= $event['penyelenggara'] ?>" placeholder="Ardhacodes">
-                                    <?= form_error('penyelenggara', '<small class="text-danger">', '</small>') ?>
+                                    <label for="event_id" class="form-label">Pilih Event</label>
 
+                                    <select class="form-select select2" name="event_id" id="event_id">
+                                        <?php foreach ($event as $ev) : ?>
+                                            <option value="<?= $ev['id'] ?>" <?php if($pesertajoinevent[0]['event_id'] == $ev['id']){
+                                                echo'selected';
+                                            } ?>><?= $ev['nama_event'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <?= form_error('event_id', '<small class="text-danger">', '</small>') ?>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Andre" value="<?= $pesertajoinevent[0]['nama']?>">
+                                    <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="asal" class="form-label">Asal Kota</label>
+                                    <input type="text" class="form-control" name="asal" id="asal" placeholder="Sidoarjo" value="<?= $pesertajoinevent[0]['asal']?>">
+                                    <?= form_error('asal', '<small class="text-danger">', '</small>') ?>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="no_tlp" class="form-label">No Tlp</label>
+                                    <input type="text" class="form-control" name="no_tlp" id="no_tlp" placeholder="6281246549498" value="<?= $pesertajoinevent[0]['no_tlp']?>">
+                                    <?= form_error('no_tlp', '<small class="text-danger">', '</small>') ?>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Ubah</button>
                             </form>
