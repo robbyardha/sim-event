@@ -23,6 +23,23 @@
                                     <label for="newpassword" class="form-label">Password Baru</label>
                                     <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="*******">
                                     <?= form_error('newpassword', '<small class="text-danger">', '</small>') ?>
+
+                                    <div class="form-check mt-1">
+                                        <input class="form-check-input" type="checkbox" id="showpass" onclick="showHidePassLog()">
+                                        <script>
+                                            function showHidePassLog() {
+                                                var pas = document.getElementById("newpassword");
+                                                if (pas.type === "password") {
+                                                    pas.type = "text";
+                                                } else {
+                                                    pas.type = "password";
+                                                }
+                                            }
+                                        </script>
+                                        <label class="form-check-label ms-2" for="showpass">
+                                            Show Password
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <a href="<?= base_url('users') ?>" class="btn btn-secondary me-2">Batal</a>

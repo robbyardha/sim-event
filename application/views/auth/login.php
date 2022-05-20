@@ -33,7 +33,7 @@
                                     </label>
                                     <div class="form-group input-affix flex-column">
                                         <label class="d-none">Password</label>
-                                        <input name="password" class="form-control" type="password">
+                                        <input name="password" id="password" class="form-control" type="password">
                                         <?= form_error('password', '<small class="text-danger">', '</small>') ?>
                                         <!-- <i class="far fa-eye" id="togglePassword"></i> -->
                                         <!-- <i class="suffix-icon feather cursor-pointer text-dark icon-eye" id="togglePassword" onclick="showHidePass()" ng-reflect-ng-class="icon-eye"></i> -->
@@ -41,11 +41,11 @@
                                             <input class="form-check-input" type="checkbox" id="showpass" onclick="showHidePassLog()">
                                             <script>
                                                 function showHidePassLog() {
-                                                    var x = document.getElementById("password");
-                                                    if (x.type === "password") {
-                                                        x.type = "text";
+                                                    var pas = document.getElementById("password");
+                                                    if (pas.type === "password") {
+                                                        pas.type = "text";
                                                     } else {
-                                                        x.type = "password";
+                                                        pas.type = "password";
                                                     }
                                                 }
                                             </script>
