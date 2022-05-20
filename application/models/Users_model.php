@@ -74,6 +74,7 @@ class Users_model extends CI_Model
     public function import()
     {
         date_default_timezone_set('Asia/Jakarta');
+        $missdata = "";
         $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         if (isset($_FILES['upload_file']['name']) && in_array($_FILES['upload_file']['type'], $file_mimes)) {
             $arr_file = explode('.', $_FILES['upload_file']['name']);
@@ -87,6 +88,10 @@ class Users_model extends CI_Model
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
             $data = [];
             for ($i = 1; $i < count($sheetData); $i++) {
+                if ($sheetData[$i][1] == $missdata && $sheetData[$i][2] == $missdata && $sheetData[$i][3] == $missdata && $sheetData[$i][4] == $missdata && $sheetData[$i][5] == $missdata && $sheetData[$i][6] == $missdata) {
+                    $this->session->set_flashdata('message', 'Data Gagal Diimport Terdapat data kosong!. Pastikan data telah valid dan terisi jika kosong gunakan NULL');
+                    redirect('users');
+                }
                 $dataBuffer = [
                     // 'id' => $sheetData[$i][0],
                     'email' => $sheetData[$i][1],
