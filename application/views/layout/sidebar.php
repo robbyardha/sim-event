@@ -107,15 +107,15 @@
              </a>
              <ul class="nav-menu menu-collapse">
 
-                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Event" || $this->uri->segment(1) == "event") {
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Kehadiran" || $this->uri->segment(1) == "kehadiran") {
                                                             echo "active";
                                                         } ?> ">
-                     <a href="<?= base_url('event') ?>">Event</a>
+                     <a href="<?= base_url('kehadiran') ?>">Kehadiran</a>
                  </li>
-                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Peserta" || $this->uri->segment(1) == "peserta") {
+                 <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Scan" || $this->uri->segment(1) == "scan") {
                                                             echo "active";
                                                         } ?> ">
-                     <a href="<?= base_url('peserta') ?>">Peserta</a>
+                     <a href="<?= base_url('scan') ?>">Scan Kehadiran</a>
                  </li>
 
              </ul>
