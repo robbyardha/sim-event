@@ -39,7 +39,7 @@
                         // OTW SIMPAN KE DATABASE
                         // alert(content);
                         // $("#qrcode").val(content);
-                        $("#qrcode").val(content);
+                        // $("#qrcode").val(content);
 
                         // REDIRECT
 
@@ -100,41 +100,79 @@
                         //     });
                         // });
                         // END MBUH
+                        // -----------------------------------------
 
+                        // -----------------------------------------
+                        // ISOK ALHAMDULLILLAH DENGAN BUTTON CLICK
                         // COBA NEH
-                        $('#verifikasi').on('click', function(e) {
-                            e.preventDefault()
-                            var qrcode = $('#qrcode').val();
-                            var event_id = $('#event_id').val();
-                            $.ajax({
-                                type: "POST",
-                                url: "<?php echo base_url() ?>index.php/scan/update_hadir",
-                                data: {
-                                    qrcode: qrcode,
-                                    event_id: event_id,
-                                },
-                                success: function(data) {
-                                    $('#qrcode').val(content);
-                                    $('#event_id').val('');
-                                    data_customer();
-                                }
-                            });
-                        });
-                        // END NEH
+                        // $('#verifikasi').on('click', function(e) {
+                        //     e.preventDefault()
+                        //     var qrcode = $('#qrcode').val();
+                        //     var event_id = $('#event_id').val();
+                        //     $.ajax({
+                        //         type: "POST",
+                        //         url: "<?php echo base_url() ?>index.php/scan/update_hadir",
+                        //         data: {
+                        //             qrcode: qrcode,
+                        //             event_id: event_id,
+                        //         },
+                        //         success: function(data) {
+                        //             $('#qrcode').val(content);
+                        //             $('#event_id').val('');
+                        //             alert("Alhamdullillah Data Berhasil Masuk")
+                        //             data_customer();
+                        //         }
+                        //     });
+                        //     if (alert('Data Telah diverifikasi!')) {} else window.location.reload();
 
+                        //     // confirmation
+                        //     // if (confirm('Data Telah diverifikasi! ')) {
+                        //     //     window.location.reload();
+                        //     // }
+                        // });
+                        // END NEH
+                        // -----------------------------------------
 
 
                         // GASS
                         // let input = document.querySelector('#qrcode');
                         // let input2 = $("#qrcode").val(content);
-                        // input.addEventListener('keyup', checkLength);
+                        // input2.addEventListener('keyup', checkLength);
 
                         // function checkLength(e) {
                         //     if (e.target.value.length === 32) {
-                        //         $('#Form').submit();
-                        //         // document.forms["Form"].submit();
+                        //         // $('#Form').submit();
+                        //         var qrcode = $('#qrcode').val();
+                        //         var event_id = $('#event_id').val();
+                        //         $.ajax({
+                        //             type: "POST",
+                        //             url: "<?php echo base_url() ?>index.php/scan/update_hadir",
+                        //             data: {
+                        //                 qrcode: qrcode,
+                        //                 event_id: event_id,
+                        //             },
+                        //             success: function(data) {
+                        //                 $('#qrcode').val(content);
+                        //                 $('#event_id').val('');
+                        //                 // alert("Alhamdullillah Data Berhasil Masuk")
+                        //                 data_customer();
+                        //             }
+                        //         });
+                        //         if (alert('Data Telah diverifikasi!')) {} else
+                        //             // document.forms["Form"].submit();
+                        //             window.location.reload();
                         //     }
                         // }
+
+
+                        $('#qrcode').val(content).keyup(function() {
+                            if ($('#qrcode').val(content).value.length == 32) {
+                                $('#Form').submit();
+                                window.location.reload();
+                            }
+                        });
+
+
 
                         // GASS
 
@@ -160,7 +198,11 @@
                     });
                 </script>
 
-
+                <script type="text/javascript" language="javascript">
+                    function redirect() {
+                        window.location.href = "<?php echo base_url() ?>index.php/scan/update_hadir";
+                    }
+                </script>
                 <hr>
                 <div class="row">
                     <div class="col">

@@ -40,9 +40,16 @@ class Scan extends CI_Controller
         $data['event'] = $this->Event_model->getAll();
         $data['eventid'] = $this->Event_model->getByid($id);
         $data['peserta'] = $this->Peserta_model->getAlldata();
-        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent();
+        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
 
-        // var_dump($data['event']);
+        // var_dump($data['peserta']);
+        // die;
+
+        // FOR LONG LAST QUERY
+        // ini_set("xdebug.var_display_max_children", '-1');
+        // ini_set("xdebug.var_display_max_data", '-1');
+        // ini_set("xdebug.var_display_max_depth", '-1');
+        // var_dump($this->db->last_query($data['joinhadirevent']));
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
