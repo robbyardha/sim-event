@@ -16,6 +16,11 @@ class Scan extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Please Login First </div>');
             redirect('auth');
         }
+
+        if ($this->session->userdata('role_id') != 1) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"><b>Kamu tidak memiliki hak akses pada modul ini</b> </div>');
+            redirect('dashboard');
+        }
     }
 
     public function index()

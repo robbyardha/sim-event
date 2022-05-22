@@ -1,8 +1,10 @@
 <!-- Content START -->
 <div class="content">
     <div class="main">
+        <?= $this->session->flashdata('message') ?>
         <div class="row">
             <div class="col-lg-3">
+
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between">

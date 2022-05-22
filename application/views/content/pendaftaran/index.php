@@ -17,7 +17,7 @@
                     </div>
                 <?php endif ?>
                 <h4>Pilih Event</h4>
-                <p>Pilih Event Kemudian Scan QR pada Event yang terpilih</p>
+                <p>Pilih Event Kemudian Daftarkan Dirimu Pada Event</p>
                 <div class="container">
                     <div class="row">
                         <form method="POST" class="row g-3">
@@ -40,8 +40,8 @@
                                     <p class="card-text"><?= $ev['deskripsi_event'] ?></p>
                                     <p class="card-text"><?= date("d F Y", strtotime($ev['tanggal_awal'])) ?> - <?= date("d F Y", strtotime($ev['tanggal_akhir'])) ?></p>
                                     <p class="card-text"><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></p>
-                                    <p class="card-text"><?= $ev['penyelenggara'] ?></p>
-                                    <a href="<?= base_url('scan/kehadiran/')  . $ev['id'] ?>" class="btn btn-warning">SCAN KEHADIRAN</a>
+                                    <p class="card-text">Penyelenggara : <?= $ev['penyelenggara'] ?></p>
+                                    <a href="<?= base_url('pendaftaran/daftarevent/')  . $ev['id'] ?>" class="btn btn-success">PILIH</a>
                                 </div>
                             </div>
                         <?php endforeach ?>
