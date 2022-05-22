@@ -23,6 +23,7 @@
 
                         <input type="hidden" id="event_id" name="event_id" value="<?= $eventid['id'] ?>" class="form-control">
                         <input type="hidden" id="nama_event" name="nama_event" value="<?= $eventid['nama_event'] ?>" class="form-control">
+                        <input type="hidden" id="email" name="email" value="<?= $this->session->userdata('email') ?>" class="form-control">
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" name="nama" class="form-control mb-2" value="<?= $this->session->userdata('nama') ?>">
                         <label for="asal">Asal</label>

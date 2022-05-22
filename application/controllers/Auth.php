@@ -185,6 +185,153 @@ class Auth extends CI_Controller
         }
     }
 
+    public function forgotpass()
+    {
+        $this->form_validation->set_rules(
+            'email',
+            'Email',
+            'trim|required|valid_email'
+        );
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Forgot Password Page";
+            $data['copyright'] = "Airlangga Conference";
+            $this->load->view('back-end/layout/header', $data);
+            $this->load->view('back-end/auth/forgotpass', $data);
+            $this->load->view('back-end/layout/timeline');
+            $this->load->view('back-end/layout/footer');
+        } else {
+            $email = $this->input->post('email');
+            $akun = $this->db->get_where('akun', ['email' => $email, 'is_active' => 1])->row_array();
+
+            if ($akun) {
+                $token = base64_encode(random_bytes(32));
+                $akun_token = [
+                    'email' => $email,
+                    'token' => $token,
+                    'date_created' => time()
+                ];
+
+                $this->db->insert('akun_token', $akun_token);
+                $this->sendEmail($token, 'forgot');
+
+                $this->session->set_flashdata('fp', '<div class="alert alert-success" role="alert">Please check your email to reset your password!</div>');
+                redirect('authentication/forgot-password');
+            } else {
+                $this->session->set_flashdata('fp', '<div class="alert alert-danger" role="alert">Email is not registered or activated!</div>');
+                redirect('authentication/forgot-password');
+            }
+        }
+    }
+
+    private function sendEmail($token, $type)
+    {
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'fottess90@gmail.com',
+            'smtp_pass' => 'Fottess0090',
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+
+        // $config = [
+        //     'protocol'  => 'smtp',
+        //     'smtp_host' => 'ssl://mail.ardhacodes.com',
+        //     'smtp_user' => 'info@ardhacodes.com',
+        //     'smtp_pass' => 'Pfa}p{@y{6Gp',
+        //     'smtp_port' => 465,
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'utf-8',
+        //     'newline'   => "\r\n"
+        // ];
+
+        $this->email->initialize($config);
+        // $data['filename'] = '/assets/images/logo/unair.png';
+        // $this->email->attach($data['filename']);
+
+        $this->email->from('fottess90@gmail.com', 'Reset Password');
+        // $this->email->from('info@ardhacodes.com', 'Reset Password');
+        $this->email->to($this->input->post('email'));
+        $data = array(
+            'email' => $this->input->post('email'),
+        );
+        $data['email'] = htmlspecialchars($this->input->post('email'));
+        $data['token'] = $token;
+        $message = $this->load->view('back-end/auth/email_reset_password', $data, true);
+        if ($type == 'verify') {
+            $this->email->subject('Account Verification');
+            $this->email->message('Click this link to verify you account : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Activate</a>');
+        } else if ($type == 'forgot') {
+            $this->email->subject('Reset Password');
+            $this->email->message($message);
+        }
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
+
+
+    public function resetPassword()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+
+        $user = $this->db->get_where('akun', ['email' => $email])->row_array();
+
+        if ($user) {
+            $user_token = $this->db->get_where('akun_token', ['token' => $token])->row_array();
+
+            if ($user_token) {
+                $this->session->set_userdata('reset_email', $email);
+                $this->changePassword();
+            } else {
+                $this->session->set_flashdata('akun', '<div class="alert alert-danger" role="alert">Reset password failed! Wrong token.</div>');
+                redirect('authentication/login');
+            }
+        } else {
+            $this->session->set_flashdata('akun', '<div class="alert alert-danger" role="alert">Reset password failed! Wrong email.</div>');
+            redirect('authentication/login');
+        }
+    }
+
+    public function changePassword()
+    {
+        if (!$this->session->userdata('reset_email')) {
+            redirect('authentication/login');
+        }
+
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|matches[passwordconfirm]');
+        $this->form_validation->set_rules('passwordconfirm', 'Repeat Password', 'trim|required|min_length[3]|matches[password]');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Change Password';
+            $this->load->view('back-end/layout/header', $data);
+            $this->load->view('back-end/auth/changepass', $data);
+            $this->load->view('back-end/layout/footer');
+        } else {
+            $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+            $email = $this->session->userdata('reset_email');
+
+            $this->db->set('password', $password);
+            $this->db->where('email', $email);
+            $this->db->update('akun');
+
+            $this->session->unset_userdata('reset_email');
+
+            $this->db->delete('akun_token', ['email' => $email]);
+
+            $this->session->set_flashdata('akun', '<div class="alert alert-success" role="alert">Password has been changed! Please login.</div>');
+            redirect('authentication/login');
+        }
+    }
+
     public function logout()
     {
         $this->session->unset_userdata('email');

@@ -85,10 +85,67 @@ class Pendaftaran extends CI_Controller
             $this->load->view('layout/footer', $data);
         } else {
             $this->Pendaftaran_model->daftarevent();
+            $this->sendEmailSuccess('success');
             // var_dump($this->db->last_query());
             // die;
             $this->session->set_flashdata('message', 'Didaftarkan');
             redirect('pendaftaran/index');
+        }
+    }
+
+    private function sendEmailSuccess($type)
+    {
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            // 'smtp_host' => 'ssl://smtp.gmail.com',
+            // 'smtp_host' => 'ssl://smtp.googlemail.com',
+            // 'smtp_host' => 'tls://smtp.googlemail.com',
+            'smtp_user' => 'fottess90@gmail.com',
+            'smtp_pass' => 'Fottess0090',
+            // 'smtp_port' => 587,
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+
+        // $config = [
+        //     'protocol'  => 'smtp',
+        //     'smtp_host' => 'ssl://mail.ardhacodes.com',
+        //     'smtp_user' => 'info@ardhacodes.com',
+        //     'smtp_pass' => 'Pfa}p{@y{6Gp',
+        //     'smtp_port' => 465,
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'utf-8',
+        //     'newline'   => "\r\n"
+        // ];
+        $this->email->initialize($config);
+        // $this->email->from('info@ardhacodes.com', 'Thank You For Registration');
+        $this->email->from('fottess90@gmail.com', 'Thank You For Registration');
+        $this->email->to($this->session->userdata('email'));
+        $data = array(
+            'email' => $this->input->post('email'),
+        );
+        $data['email'] = htmlspecialchars($this->input->post('email'));
+        $data['nama_event'] = htmlspecialchars($this->input->post('nama_event'));
+        $data['nama'] = htmlspecialchars($this->input->post('nama'));
+        $data['asal'] = htmlspecialchars($this->input->post('asal'));
+        $data['no_tlp'] = htmlspecialchars($this->input->post('no_tlp'));
+        $message = $this->load->view('content/pendaftaran/email_success', $data, true);
+        if ($type == 'success') {
+            $this->email->subject('Thank You For Registration');
+            // $this->email->message('Click this link to verify you account : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Activate</a>');
+            $this->email->message($message);
+        } else if ($type == 'forgot') {
+            $this->email->subject('Reset Password');
+            $this->email->message($message);
+        }
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
         }
     }
 }
