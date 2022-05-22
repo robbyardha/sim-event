@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MY EVENT">
-    <meta name="keywords" content="MY EVENT">
-    <meta name="author" content="MY EVENT">
-    <link rel="icon" href="<?= base_url('/assets/images/logo/unair.png') ?>" type="image/x-icon">
-    <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/unair.png') ?>" type="image/x-icon">
+    <meta name="description" content="MY EVENT - ARDHACODES">
+    <meta name="keywords" content="MY EVENT - ARDHACODES">
+    <meta name="author" content="MY EVENT - ARDHACODES">
+    <link rel="icon" href="<?= base_url('/assets/images/arcodes.png') ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url('/assets/images/arcodes.png') ?>" type="image/x-icon">
     <title>Thank You For Registration</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -105,7 +105,7 @@
                     <table align="center" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
-                                <td><img src="<?= base_url('/assets/images/logo/unairgold.png')  ?>" height="55px" alt="" style="margin-bottom: 30px;"></td>
+                                <td><img src="<?= base_url('/assets/images/arcodes.png')  ?>" height="55px" alt="" style="margin-bottom: 30px;"></td>
                                 <!-- <td><img src="<?= base_url('/assets/images/email-template/delivery.png')  ?>" alt="" style="margin-bottom: 30px;"></td> -->
                             </tr>
                             <tr>

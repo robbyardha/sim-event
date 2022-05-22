@@ -2,6 +2,12 @@
 
 class Pendaftaran_model extends CI_Model
 {
+
+    public function getListPesertaByUserId()
+    {
+        return $this->db->get_where('peserta_event', ['users_id' => $this->session->userdata('user_id')])->result_array();
+    }
+
     public function daftarevent()
     {
         // LOAD LIBRARY

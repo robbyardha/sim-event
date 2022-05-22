@@ -30,7 +30,10 @@
                             </div>
                         </form>
                     </div>
-
+                    <?php
+                    // var_dump($pesertauserid);
+                    // die;
+                    ?>
                     <div class="row justify-content-md-center">
                         <?php foreach ($event as $ev) : ?>
                             <div class="card bg-info text-dark ms-2 me-2 " style="width: 18rem;">
@@ -42,6 +45,13 @@
                                     <p class="card-text"><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></p>
                                     <p class="card-text">Penyelenggara : <?= $ev['penyelenggara'] ?></p>
                                     <a href="<?= base_url('pendaftaran/daftarevent/')  . $ev['id'] ?>" class="btn btn-success">PILIH</a>
+                                    <?php foreach ($pesertauserid as $pusid) : ?>
+                                        <?php if ($peserta['users_id'] == $this->session->userdata('user_id') && $peserta['event_id'] == NULL) : ?>
+                                        <?php else : ?>
+                                            <a href="<?= base_url('pendaftaran/daftarevent/')  . $ev['id'] ?>" class="btn btn-danger">SUDAH TERDAFTAR</a>
+                                        <?php endif ?>
+                                    <?php endforeach ?>
+
                                 </div>
                             </div>
                         <?php endforeach ?>

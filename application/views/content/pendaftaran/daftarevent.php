@@ -31,6 +31,7 @@
                         <label for="no_tlp">No Telephone</label>
                         <input type="text" id="no_tlp" name="no_tlp" class="form-control mb-2" value="<?= $this->session->userdata('no_tlp') ?>">
 
+
                         <button type="submit" class="btn btn-sm btn-success mt-2" id="daftar" name="daftar">Daftar</button>
                     </form>
                     <!-- <input type="button" class="btn btn-sm btn-success" name="verifikasi" id="verifikasi" value="Verifikasi"> -->

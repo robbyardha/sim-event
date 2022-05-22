@@ -29,7 +29,7 @@
                                 <div class="mb-3">
                                     <label class="form-label d-flex justify-content-between">
                                         <span>Password</span>
-                                        <a href="" class="text-primary font">Forget Password?</a>
+                                        <a href="<?= base_url('auth/forgotpass') ?>" class="text-primary font">Forget Password?</a>
                                     </label>
                                     <div class="form-group input-affix flex-column">
                                         <label class="d-none">Password</label>

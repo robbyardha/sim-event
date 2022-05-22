@@ -25,8 +25,9 @@ class Pendaftaran extends CI_Controller
         $data['event'] = $this->Event_model->getAll();
         $data['peserta'] = $this->Peserta_model->getAlldata();
         $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
+        $data['pesertauserid'] = $this->Pendaftaran_model->getListPesertaByUserId();
 
-        // var_dump($data['event']);
+        // var_dump($data['pesertauserid']);
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
@@ -95,34 +96,34 @@ class Pendaftaran extends CI_Controller
 
     private function sendEmailSuccess($type)
     {
-        $config = [
-            'protocol'  => 'smtp',
-            'smtp_host' => 'smtp.gmail.com',
-            // 'smtp_host' => 'ssl://smtp.gmail.com',
-            // 'smtp_host' => 'ssl://smtp.googlemail.com',
-            // 'smtp_host' => 'tls://smtp.googlemail.com',
-            'smtp_user' => 'fottess90@gmail.com',
-            'smtp_pass' => 'Fottess0090',
-            // 'smtp_port' => 587,
-            'smtp_port' => 465,
-            'mailtype'  => 'html',
-            'charset'   => 'utf-8',
-            'newline'   => "\r\n"
-        ];
-
         // $config = [
         //     'protocol'  => 'smtp',
-        //     'smtp_host' => 'ssl://mail.ardhacodes.com',
-        //     'smtp_user' => 'info@ardhacodes.com',
-        //     'smtp_pass' => 'Pfa}p{@y{6Gp',
+        //     'smtp_host' => 'smtp.gmail.com',
+        //     // 'smtp_host' => 'ssl://smtp.gmail.com',
+        //     // 'smtp_host' => 'ssl://smtp.googlemail.com',
+        //     // 'smtp_host' => 'tls://smtp.googlemail.com',
+        //     'smtp_user' => 'fottess90@gmail.com',
+        //     'smtp_pass' => 'Fottess0090',
+        //     // 'smtp_port' => 587,
         //     'smtp_port' => 465,
         //     'mailtype'  => 'html',
         //     'charset'   => 'utf-8',
         //     'newline'   => "\r\n"
         // ];
+
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://mail.ardhacodes.com',
+            'smtp_user' => 'info@ardhacodes.com',
+            'smtp_pass' => 'Pfa}p{@y{6Gp',
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
         $this->email->initialize($config);
-        // $this->email->from('info@ardhacodes.com', 'Thank You For Registration');
-        $this->email->from('fottess90@gmail.com', 'Thank You For Registration');
+        $this->email->from('info@ardhacodes.com', 'Thank You For Registration');
+        // $this->email->from('fottess90@gmail.com', 'Thank You For Registration');
         $this->email->to($this->session->userdata('email'));
         $data = array(
             'email' => $this->input->post('email'),

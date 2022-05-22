@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Airlangga Conference">
-    <meta name="keywords" content="Airlangga Conference">
-    <meta name="author" content="Airlangga Conference">
+    <meta name="description" content="MY EVENT - ARDHACODES">
+    <meta name="keywords" content="MY EVENT - ARDHACODES">
+    <meta name="author" content="MY EVENT - ARDHACODES">
     <link rel="icon" href="<?= base_url('/assets/images/logo/unairgold.png') ?>" type="image/x-icon">
     <link rel="shortcut icon" href="<?= base_url('/assets/images/logo/unairgold.png') ?>" type="image/x-icon">
-    <title>Reset Password - Airlangga Conference</title>
+    <title>Reset Password - MY EVENT - ARDHACODES</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -60,7 +60,7 @@
                                     <table style="width: 650px; margin: 0 auto; margin-bottom: 30px">
                                         <tbody>
                                             <tr>
-                                                <td><img src="<?= base_url('/assets/images/logo/unairgold.png') ?>" height="50px" alt=""></td>
+                                                <td><img src="<?= base_url('/assets/images/arcodes.png') ?>" height="50px" alt=""></td>
                                                 <td style="text-align: right; color:#999"><span>Reset Password</span></td>
                                             </tr>
                                         </tbody>
@@ -74,12 +74,12 @@
                             <tr>
                                 <td style="padding: 30px">
                                     <h6 style="font-weight: 600">Password Reset</h6>
-                                    <p>you forgot your password account Airlangga Conference</p>
+                                    <p>you forgot your password account MY EVENT - ARDHACODES</p>
                                     <p style="text-align: center"><a href="<?= base_url('auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '') ?>" style="padding: 10px; background-color: #7366ff; color: #fff; display: inline-block; border-radius: 4px">Reset Password</a></p>
                                     <p>If you have remember your password you can safely ignore his email.</p>
                                     <p>Good luck! Hope it works.</p>
                                     <p style="margin-bottom: 0">
-                                        Regards,<br>Airlangga Conference</p>
+                                        Regards,<br>MY EVENT - ARDHACODES</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -88,7 +88,7 @@
                         <tbody>
                             <tr style="text-align: center">
                                 <td>
-                                    <p style="color: #999; margin-bottom: 0">Airlangga Conference</p>
+                                    <p style="color: #999; margin-bottom: 0">MY EVENT - ARDHACODES</p>
                                     <!-- <p style="color: #999; margin-bottom: 0">Don't Like These Emails?<a href="#" style="color: #7366ff">Unsubscribe</a></p> -->
                                     <p style="color: #999; margin-bottom: 0">Powered By Ardhacodes</p>
                                 </td>
