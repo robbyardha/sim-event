@@ -295,4 +295,9 @@ class Peserta_model extends CI_Model
             redirect('peserta');
         }
     }
+
+    public function countPeserta()
+    {
+        return $this->db->get('peserta_event')->num_rows();
+    }
 }

@@ -16,6 +16,11 @@ class Users_model extends CI_Model
         }
     }
 
+    public function getSessUser()
+    {
+        return $this->db->get_where('users', ['id' => $this->session->userdata('user_id')])->row_array();
+    }
+
     public function tambah()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -111,5 +116,11 @@ class Users_model extends CI_Model
             $this->session->set_flashdata('message', 'Data berhasil Diimport');
             redirect('users');
         }
+    }
+
+    public function countUsers()
+    {
+        $this->db->where('role_id', 2);
+        return $this->db->get('users')->num_rows();
     }
 }

@@ -23,6 +23,7 @@ class Users extends CI_Controller
     public function index()
     {
         $data['title'] = "Users - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['users'] = $this->Users_model->getAll();
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
@@ -95,6 +96,7 @@ class Users extends CI_Controller
         );
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Users - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $this->load->view('layout/header', $data);
             $this->load->view('layout/navbar', $data);
             $this->load->view('layout/sidebar', $data);
@@ -145,6 +147,7 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Users - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $data['usersid'] = $this->Users_model->getByid($id);
             // var_dump($data['event']);
             // die;
@@ -176,6 +179,7 @@ class Users extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Users - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $data['usersid'] = $this->Users_model->getByid($id);
             // var_dump($data['event']);
             // die;
@@ -204,6 +208,7 @@ class Users extends CI_Controller
     public function import()
     {
         $data['title'] = "Users - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['users'] = $this->Users_model->getAll();
         // var_dump($data['pesertajoinevent']);
         // die;

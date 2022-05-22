@@ -9,6 +9,7 @@ class Profile extends CI_Controller
         $this->load->model('Event_model');
         $this->load->model('Peserta_model');
         $this->load->model('Profile_model');
+        $this->load->model('Users_model');
         if (!$this->session->userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Please Login First </div>');
             redirect('auth');
@@ -63,6 +64,7 @@ class Profile extends CI_Controller
         );
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Profile - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $data['event'] = $this->Event_model->getAll();
             $data['peserta'] = $this->Peserta_model->getAlldata();
             $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
@@ -116,6 +118,7 @@ class Profile extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Profile - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $data['event'] = $this->Event_model->getAll();
             $data['peserta'] = $this->Peserta_model->getAlldata();
             $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();

@@ -34,6 +34,7 @@ class Report extends CI_Controller
     public function index($keyword = null)
     {
         $data['title'] = "Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         // $data['eventid'] = $this->Event_model->getByid();
         $data['peserta'] = $this->Peserta_model->getAlldata();
@@ -68,6 +69,7 @@ class Report extends CI_Controller
     public function kehadiran($id)
     {
         $data['title'] = "Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['eventid'] = $this->Event_model->getByid($id);
         $data['peserta'] = $this->Peserta_model->getAlldata();
@@ -92,6 +94,7 @@ class Report extends CI_Controller
     public function exportxls($id)
     {
         $data['title'] = "Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['eventid'] = $this->Event_model->getByid($id);
         $data['peserta'] = $this->Peserta_model->getAlldata();
@@ -151,6 +154,7 @@ class Report extends CI_Controller
     {
 
         $data['title'] = "Report Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['eventid'] = $this->Event_model->getByid($id);
         $data['peserta'] = $this->Peserta_model->getAlldata();
@@ -177,6 +181,7 @@ class Report extends CI_Controller
     public function dataqr()
     {
         $data['title'] = "Data QR - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['peserta'] = $this->Peserta_model->getAlldata();
         $data['joinwithevent'] = $this->Scan_model->joinDataPesertaWithEvent();
@@ -202,6 +207,7 @@ class Report extends CI_Controller
     {
 
         $data['title'] = "Report QRCode Peserta - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['peserta'] = $this->Peserta_model->getAlldata();
         $data['joinwithevent'] = $this->Scan_model->joinDataPesertaWithEvent();

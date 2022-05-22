@@ -6,11 +6,11 @@
                     <div>
                         <div class="mb-5">
                             <div class="logo">
-                                <img alt="logo" class="img-fluid" src="assets/images/logo/logo-white.png" style="height: 50px;">
+                                <img alt="logo" class="img-fluid" src="assets/images/arcodes.png" style="height: 50px;">
                             </div>
                         </div>
-                        <h3 class="text-white">Make your work easier</h3>
-                        <p class="text-white mt-4 mb-5 o-75">Climb leg rub face on everything give attitude under the bed.</p>
+                        <h3 class="text-white">MY EVENT</h3>
+                        <p class="text-white mt-4 mb-5 o-75">Get Your Benefit, Let's Open Minded</p>
                     </div>
                 </div>
                 <div class="col-md-8 px-0">
@@ -58,6 +58,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Log In</button>
                             </form>
+                            <div class="text-muted text-center mt-2">
+                                <p>Don't Have Account? <a href="<?= base_url('auth/registrasi') ?>">Register</a> </p>
+                            </div>
                         </div>
                     </div>
                 </div>

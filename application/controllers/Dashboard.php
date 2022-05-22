@@ -8,6 +8,9 @@ class Dashboard extends CI_Controller
         $this->load->library('form_validation');
         // var_dump($this->session->userdata());
         // die;
+        $this->load->model('Event_model');
+        $this->load->model('Peserta_model');
+        $this->load->model('Users_model');
         if (!$this->session->userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Please Login First </div>');
             redirect('auth');
@@ -18,7 +21,31 @@ class Dashboard extends CI_Controller
     }
     public function index()
     {
+
+        $url = "https://api.quotable.io/random";
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        //for debug only!
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+        // var_dump(json_decode($resp));
+        // die;
+        $data['quotes'] = json_decode($resp);
+
         $data['title'] = "Dashboard - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['eventcount'] = $this->Event_model->countEvent();
+        $data['pesertacount'] = $this->Peserta_model->countPeserta();
+        $data['userscount'] = $this->Users_model->countUsers();
+        // var_dump($data['myuser']);
+        // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
         $this->load->view('layout/sidebar', $data);
@@ -47,6 +74,7 @@ class Dashboard extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "QR - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $this->load->view('layout/header', $data);
             $this->load->view('layout/navbar', $data);
             $this->load->view('layout/sidebar', $data);
@@ -91,6 +119,7 @@ class Dashboard extends CI_Controller
     public function qrscan()
     {
         $data['title'] = "Dashboard - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
         $this->load->view('layout/sidebar', $data);

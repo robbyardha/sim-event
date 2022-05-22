@@ -7,6 +7,7 @@ class Event extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Event_model');
+        $this->load->model('Users_model');
         if (!$this->session->userdata('username')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Please Login First </div>');
             redirect('auth');
@@ -23,6 +24,7 @@ class Event extends CI_Controller
     public function index()
     {
         $data['title'] = "Event - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
@@ -91,6 +93,7 @@ class Event extends CI_Controller
         );
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Event - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
             $this->load->view('layout/header', $data);
             $this->load->view('layout/navbar', $data);
             $this->load->view('layout/sidebar', $data);
@@ -165,6 +168,7 @@ class Event extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "Event - SIM Event";
             $data['event'] = $this->Event_model->getByid($id);
+            $data['myuser'] = $this->Users_model->getSessUser();
             // var_dump($data['event']);
             // die;
             $this->load->view('layout/header', $data);

@@ -61,4 +61,9 @@ class Event_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('event');
     }
+
+    public function countEvent()
+    {
+        return $this->db->get('event')->num_rows();
+    }
 }
