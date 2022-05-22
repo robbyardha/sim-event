@@ -97,7 +97,7 @@
              <li class="nav-group-title">Pendaftaran Event</li>
              <li class="nav-submenu">
                  <a class="nav-submenu-title ">
-                     <i class="feather icon-file-text"></i>
+                     <i class="feather icon-plus-square"></i>
                      <span>Pendaftaran Event</span>
                      <i class="nav-submenu-arrow"></i>
                  </a>
@@ -116,13 +116,35 @@
                  </ul>
              </li>
 
+             <li class="nav-group-title">Profile</li>
+             <li class="nav-submenu">
+                 <a class="nav-submenu-title ">
+                     <i class="feather icon-user"></i>
+                     <span>Profile</span>
+                     <i class="nav-submenu-arrow"></i>
+                 </a>
+                 <ul class="nav-menu menu-collapse">
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "profile" || $this->uri->segment(1) == "Profile") {
+                                                                echo "active";
+                                                            } ?> ">
+                         <a href="<?= base_url('profile') ?>">Change Profile</a>
+                     </li>
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(2) == "Changepassword" || $this->uri->segment(2) == "changepassword") {
+                                                                echo "active";
+                                                            } ?> ">
+                         <a href="<?= base_url('profile/changepassword') ?>">Change Password</a>
+                     </li>
+
+                 </ul>
+             </li>
+
 
 
          <?php elseif ($this->session->userdata('role_id') == 2) : ?>
              <li class="nav-group-title">Pendaftaran Event</li>
              <li class="nav-submenu">
                  <a class="nav-submenu-title ">
-                     <i class="feather icon-file-text"></i>
+                     <i class="feather icon-plus-square"></i>
                      <span>Pendaftaran Event</span>
                      <i class="nav-submenu-arrow"></i>
                  </a>
@@ -136,6 +158,28 @@
                                                                 echo "active";
                                                             } ?> ">
                          <a href="<?= base_url('activity') ?>">My Activity Event</a>
+                     </li>
+
+                 </ul>
+             </li>
+
+             <li class="nav-group-title">Profile</li>
+             <li class="nav-submenu">
+                 <a class="nav-submenu-title ">
+                     <i class="feather icon-user"></i>
+                     <span>Profile</span>
+                     <i class="nav-submenu-arrow"></i>
+                 </a>
+                 <ul class="nav-menu menu-collapse">
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "profile" || $this->uri->segment(1) == "Profile") {
+                                                                echo "active";
+                                                            } ?> ">
+                         <a href="<?= base_url('profile') ?>">Change Profile</a>
+                     </li>
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(2) == "Changepassword" || $this->uri->segment(2) == "changepassword") {
+                                                                echo "active";
+                                                            } ?> ">
+                         <a href="<?= base_url('profile/changepassword') ?>">Change Password</a>
                      </li>
 
                  </ul>
