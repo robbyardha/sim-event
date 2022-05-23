@@ -105,31 +105,31 @@
                         // -----------------------------------------
                         // ISOK ALHAMDULLILLAH DENGAN BUTTON CLICK
                         // COBA NEH
-                        // $('#verifikasi').on('click', function(e) {
-                        //     e.preventDefault()
-                        //     var qrcode = $('#qrcode').val();
-                        //     var event_id = $('#event_id').val();
-                        //     $.ajax({
-                        //         type: "POST",
-                        //         url: "<?php echo base_url() ?>index.php/scan/update_hadir",
-                        //         data: {
-                        //             qrcode: qrcode,
-                        //             event_id: event_id,
-                        //         },
-                        //         success: function(data) {
-                        //             $('#qrcode').val(content);
-                        //             $('#event_id').val('');
-                        //             alert("Alhamdullillah Data Berhasil Masuk")
-                        //             data_customer();
-                        //         }
-                        //     });
-                        //     if (alert('Data Telah diverifikasi!')) {} else window.location.reload();
+                        $('#verifikasi').on('click', function(e) {
+                            e.preventDefault()
+                            var qrcode = $('#qrcode').val();
+                            var event_id = $('#event_id').val();
+                            $.ajax({
+                                type: "POST",
+                                url: "<?php echo base_url() ?>index.php/scan/update_hadir",
+                                data: {
+                                    qrcode: qrcode,
+                                    event_id: event_id,
+                                },
+                                success: function(data) {
+                                    $('#qrcode').val(content);
+                                    $('#event_id').val('');
+                                    alert("Alhamdullillah Data Berhasil Masuk")
+                                    data_customer();
+                                }
+                            });
+                            if (alert('Data Telah diverifikasi!')) {} else window.location.reload();
 
-                        //     // confirmation
-                        //     // if (confirm('Data Telah diverifikasi! ')) {
-                        //     //     window.location.reload();
-                        //     // }
-                        // });
+                            // confirmation
+                            // if (confirm('Data Telah diverifikasi! ')) {
+                            //     window.location.reload();
+                            // }
+                        });
                         // END NEH
                         // -----------------------------------------
 
