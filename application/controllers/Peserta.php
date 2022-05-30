@@ -31,7 +31,7 @@ class Peserta extends CI_Controller
         $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
         $data['allusers'] = $this->Users_model->joinUserwithPeserta();
 
-        // var_dump($data['allusers']);
+        // var_dump($data['joineventpeserta']);
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
@@ -116,6 +116,14 @@ class Peserta extends CI_Controller
             ]
         );
         $this->form_validation->set_rules(
+            'users_id',
+            'Users_id',
+            'required',
+            [
+                'required' => "Field ini harus diisi"
+            ]
+        );
+        $this->form_validation->set_rules(
             'nama',
             'Nama',
             'required',
@@ -144,7 +152,8 @@ class Peserta extends CI_Controller
             $data['myuser'] = $this->Users_model->getSessUser();
             $data['pesertaid'] = $this->Peserta_model->getById($id);
             $data['pesertajoinevent'] = $this->Peserta_model->joinWithEventId($id);
-
+            $data['pesertajoinusers'] = $this->Peserta_model->joinWithUsersId($id);
+            $data['user'] = $this->Users_model->getAll();
             $data['eventid'] = $this->Event_model->getByid($id);
             $data['event'] = $this->Event_model->getAll();
             // var_dump($data['pesertajoinevent']);

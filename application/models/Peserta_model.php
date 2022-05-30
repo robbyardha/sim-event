@@ -24,7 +24,7 @@ class Peserta_model extends CI_Model
 
     public function joinWithEvent()
     {
-        $this->db->select("peserta_event.id, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
+        $this->db->select("peserta_event.id AS pesevid, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id AS evid, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
         $this->db->from("peserta_event");
         $this->db->join("event", "event.id = peserta_event.event_id");
         $result = $this->db->get();
@@ -32,9 +32,18 @@ class Peserta_model extends CI_Model
     }
     public function joinWithEventId($id)
     {
-        $this->db->select("peserta_event.id, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
+        $this->db->select("peserta_event.id AS pesevid, peserta_event.uuid, peserta_event.event_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, event.id AS evid, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara");
         $this->db->from("peserta_event");
         $this->db->join("event", "event.id = peserta_event.event_id");
+        $this->db->where('peserta_event.id', $id);
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+    public function joinWithUsersId($id)
+    {
+        $this->db->select("peserta_event.id AS pesuid, peserta_event.uuid, peserta_event.event_id,peserta_event.users_id, peserta_event.tanggal_daftar, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img, users.id AS usid, users.nama, users.email, users.username, users.nama, users.no_tlp ");
+        $this->db->from("peserta_event");
+        $this->db->join("users", "users.id = peserta_event.users_id");
         $this->db->where('peserta_event.id', $id);
         $result = $this->db->get();
         return $result->result_array();
@@ -96,10 +105,12 @@ class Peserta_model extends CI_Model
     {
         $id = htmlspecialchars($this->input->post('id'));
         $event_id = htmlspecialchars($this->input->post('event_id'));
+        $users_id = htmlspecialchars($this->input->post('users_id'));
         $nama = htmlspecialchars($this->input->post('nama'));
         $asal = htmlspecialchars($this->input->post('asal'));
         $no_tlp = htmlspecialchars($this->input->post('no_tlp'));
         $this->db->set('event_id', $event_id);
+        $this->db->set('users_id', $users_id);
         $this->db->set('nama', $nama);
         $this->db->set('asal', $asal);
         $this->db->set('no_tlp', $no_tlp);

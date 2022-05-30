@@ -47,18 +47,18 @@
                                     <td><?= $pes['nama_event'] ?></td>
                                     <td><?= $pes['tanggal_daftar'] ?> </td>
                                     <td><?= $pes['nama'] ?></td>
-                                    <td><img class="img-fluid" src="<?= base_url('assets/dataqr/') ?><?=$pes['qr_img'] ?> ?>" alt="" srcset=""></td>
+                                    <td><img class="img-fluid" src="<?= base_url('assets/dataqr/') ?><?= $pes['qr_img'] ?> ?>" alt="" srcset=""></td>
 
                                     <td>
 
-                                        <a href="<?= base_url('peserta/edit/') ?><?= $pes['id'] ?>" class="btn btn-sm btn-success">Edit</a>
-                                        <a data-bs-toggle="modal" data-bs-target="#hapus_peserta<?= $pes['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+                                        <a href="<?= base_url('peserta/edit/') ?><?= $pes['pesevid'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                        <a data-bs-toggle="modal" data-bs-target="#hapus_peserta<?= $pes['pesevid']; ?>" class="btn btn-sm btn-danger">Hapus</a>
 
                                     </td>
                                 </tr>
 
                                 <!-- MODAL HAPUS EVENT -->
-                                <div class="modal fade" id="hapus_peserta<?= $pes['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="hapus_peserta<?= $pes['pesevid']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -72,7 +72,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type="hidden" name="id" value="<?= $pes['id']; ?>">
+                                                    <input type="hidden" name="id" value="<?= $pes['pesevid']; ?>">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-danger">Delete</button>
                                                 </div>
