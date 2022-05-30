@@ -29,8 +29,9 @@ class Peserta extends CI_Controller
         $data['event'] = $this->Event_model->getAll();
         $data['peserta'] = $this->Peserta_model->getAlldata();
         $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
+        $data['allusers'] = $this->Users_model->joinUserwithPeserta();
 
-        // var_dump($data['event']);
+        // var_dump($data['allusers']);
         // die;
         $this->load->view('layout/header', $data);
         $this->load->view('layout/navbar', $data);
@@ -79,6 +80,7 @@ class Peserta extends CI_Controller
             $data['myuser'] = $this->Users_model->getSessUser();
             $data['event'] = $this->Event_model->getAll();
             $data['peserta'] = $this->Peserta_model->getAlldata();
+            $data['user'] = $this->Users_model->getAll();
             $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
             // var_dump($this->session->userdata());
             // die;
@@ -189,5 +191,26 @@ class Peserta extends CI_Controller
     {
         $this->load->helper('download');
         force_download('assets/document/format_peserta.xlsx', NULL);
+    }
+
+    public function getUsersDetail()
+    {
+        // POST data
+        // $postData = $this->input->post('id');
+        // $postData = $this->input->post('id');
+        $id = $_GET['id'];
+        $nama = $_GET['nama'];
+
+        $arr['id'] = $id;
+        $arr['nama'] = $nama;
+
+        // get data
+        // $data = $this->Users_model->getUserDetail($postData);
+
+        // var_dump(json_encode($arr));
+        // die;
+        echo json_encode($arr);
+        // echo ($postData);
+        // var_dump(json_encode($data));
     }
 }

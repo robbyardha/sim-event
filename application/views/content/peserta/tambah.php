@@ -29,10 +29,115 @@
                                     <?= form_error('event_id', '<small class="text-danger">', '</small>') ?>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Nama</label>
-                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Andre">
+                                    <label for="pilihnama" class="form-label">Pilih Nama</label>
+                                    <select class="form-select select2" name="pilihnama" id="pilihnama">
+                                        <option value="">-- PILIH USER --</option>
+                                        <?php foreach ($user as $us) : ?>
+                                            <option value="<?= $us['id'] ?>"><?= $us['nama'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                     <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="users_id" class="form-label">User Id</label>
+                                    <input type="text" readonly class="form-control" name="users_id" id="users_id" value="">
+                                    <?= form_error('users_id', '<small class="text-danger">', '</small>') ?>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" readonly class="form-control" name="nama" id="nama" value="">
+                                    <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
+                                </div>
+
+                                <script>
+                                    // function getUserID() {
+                                    //     var e = document.getElementById("nama");
+                                    //     e.addEventListener("change", function() {
+                                    //         var val = 7000000;
+                                    //         document.getElementById("users_id").value = val;
+                                    //     })
+                                    // };
+
+                                    // function getIDUser() {
+                                    //     var id = $("#nama").val();
+                                    //     $.ajax({
+                                    //         url: 'auto_proses.php',
+                                    //         data: "id=" + id,
+                                    //     }).success(function(data) {
+                                    //         var json = data,
+                                    //             obj = JSON.parse(json);
+                                    //         $('#nama').val(obj.nama);
+                                    //         $('#email').val(obj.email);
+
+                                    //     })
+                                    // }
+
+                                    // ISOKKK
+
+                                    // $(document).ready(function() {
+                                    //     $('#nama').change(function() {
+                                    //         var id = $("#nama").val();
+                                    //         $.ajax({
+                                    //             url: '<?= base_url() ?>index.php/Peserta/getUsersDetail',
+                                    //             type: 'get',
+                                    //             data: {
+                                    //                 "id": id,
+                                    //                 "nama": id,
+                                    //             },
+                                    //             success: function(result) {
+                                    //                 $("#users_id").val(result);
+                                    //                 $("#namanew").val(result);
+
+                                    //             }
+                                    //         });
+                                    //     });
+                                    // })
+
+                                    // END
+                                    $(document).ready(function() {
+                                        $('#pilihnama').change(function() {
+                                            var id = $("#pilihnama").val();
+                                            var nama = $("#pilihnama option:selected").text();
+                                            $.ajax({
+                                                url: '<?= base_url() ?>index.php/Peserta/getUsersDetail',
+                                                type: 'get',
+                                                data: {
+                                                    "id": id,
+                                                    "nama": nama,
+                                                },
+                                                dataType: "json",
+                                                // success: function(result) {
+                                                //     $("#users_id").val(result);
+                                                //     $("#nama").val(result);
+
+                                                // }
+                                                success: function(result) {
+
+                                                    // jq_json_obj = new Object(result).toString; //Convert the JSON object to jQuery-compatible
+                                                    jq_json_obj = new Object(result); //Convert the JSON object to jQuery-compatible
+                                                    // jq_json_obj = $.parseJSON(result); //Convert the JSON object to jQuery-compatible
+
+                                                    if (typeof jq_json_obj == 'object') { //Test if variable is a [JSON] object
+                                                        jq_obj = eval(jq_json_obj);
+
+                                                        //Convert back to an array
+                                                        jq_array = [];
+                                                        for (elem in jq_obj) {
+                                                            jq_array.push(jq_obj[elem]);
+                                                        }
+                                                        console.log(jq_array);
+                                                        $("#users_id").val(jq_array[0]);
+                                                        $("#nama").val(jq_array[1]);
+
+                                                    } else {
+                                                        console.log("Error occurred!");
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    })
+                                </script>
                                 <div class="mb-3">
                                     <label for="asal" class="form-label">Asal Kota</label>
                                     <input type="text" class="form-control" name="asal" id="asal" placeholder="Sidoarjo">

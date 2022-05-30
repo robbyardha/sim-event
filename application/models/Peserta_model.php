@@ -78,7 +78,7 @@ class Peserta_model extends CI_Model
         date_default_timezone_set('Asia/Jakarta');
         $data = [
             'uuid' => $uuidpeserta,
-            'users_id' => $this->session->userdata('user_id'),
+            'users_id' => htmlspecialchars($this->input->post('users_id')),
             'event_id' => htmlspecialchars($this->input->post('event_id')),
             'tanggal_daftar' => date("Y-m-d H:i:s"),
             'nama' => htmlspecialchars($this->input->post('nama')),

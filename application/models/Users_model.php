@@ -16,6 +16,38 @@ class Users_model extends CI_Model
         }
     }
 
+    public function getUserDetail($postData = array())
+    {
+
+        $response = array();
+
+        if (isset($postData['id'])) {
+
+            // Select record
+            $this->db->select('*');
+            $this->db->where('id', $postData['id']);
+            $records = $this->db->get('users');
+            $response = $records->result_array();
+        }
+        // var_dump($this->db->last_query($response));
+        // die;
+        return $response;
+    }
+
+    public function getIdGet($id)
+    {
+        return $this->db->get_where('users', ['id' => $id])->result_array();
+    }
+
+    public function joinUserwithPeserta()
+    {
+        $this->db->select('users.id, users.email, users.username, users.nama, users.asal, users.no_tlp, peserta_event.id, peserta_event.uuid, peserta_event.users_id, peserta_event.event_id, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp');
+        $this->db->from('users');
+        $this->db->join('peserta_event', 'users.id = peserta_event.users_id');
+        $result = $this->db->get();
+        return $result->result_array();
+    }
+
     public function getSessUser()
     {
         return $this->db->get_where('users', ['id' => $this->session->userdata('user_id')])->row_array();
