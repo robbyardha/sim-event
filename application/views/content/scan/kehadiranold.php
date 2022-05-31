@@ -4,8 +4,8 @@
             <h4 class="page-title">Scan Kehadiran <?= $eventid['nama_event'] ?></h4>
             <div class="breadcrumb">
                 <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
-                <div class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>"> Home </a></div>
-                <div class="breadcrumb-item"><a href="<?= base_url('scan') ?>"> Scan </a></div>
+                <div class="breadcrumb-item"><a href="index.html"> Home </a></div>
+                <div class="breadcrumb-item"><a href="javascript:void(0)"> Scan </a></div>
                 <div class="breadcrumb-item"><a href="#"> Kehadiran </a></div>
             </div>
         </div>
@@ -17,24 +17,22 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <a href="<?= base_url('scan') ?>" class="btn btn-sm btn-primary">Back To List Event</a>
                 <h4 class="text-center">Scan Kehadiran <?= $eventid['nama_event'] ?></h4>
                 <div class="row">
                     <video id="preview" width="300" height="300"></video>
+                    <form id="Form" action="<?= base_url('scan/update_hadir') ?>" method="post">
+                        <label for="">ID QR</label>
+                        <input type="text" id="qrcode" name="qrcode" class="form-control">
+                        <input type="text" id="event_id" name="event_id" value="<?= $eventid['id'] ?>" class="form-control">
 
-                    <form id="Form" action="" method="post">
-                        <!-- <label for="">ID QR</label> -->
-                        <input type="hidden" id="qrcode" name="qrcode" class="form-control">
-                        <input type="hidden" id="event_id" name="event_id" value="<?= $eventid['id'] ?>" class="form-control">
-
-                        <button type="submit" hidden class="btn btn-sm btn-success" id="verifikasi" name="verifikasi">Verifikasi</button>
-                        <!-- <input type="submit" class="btn btn-sm btn-success" id="verifikasi" name="verifikasi" value="Verifikasi"></input> -->
+                        <!-- <button type="submit" class="btn btn-sm btn-success" id="verifikasi" name="verifikasi">Verifikasi</button> -->
+                        <input type="submit" class="btn btn-sm btn-success" id="verifikasi" name="verifikasi" value="Verifikasi"></input>
                     </form>
                     <!-- <input type="button" class="btn btn-sm btn-success" name="verifikasi" id="verifikasi" value="Verifikasi"> -->
                     <!-- <a href="javascript:;" class="btn btn-sm btn-success" id="verifikasi">Verifikasi Data Peserta!</a> -->
                 </div>
 
-                <!-- <script type="text/javascript">
+                <script type="text/javascript">
                     let scanner = new Instascan.Scanner({
                         video: document.getElementById('preview')
                     });
@@ -178,20 +176,7 @@
                                 window.location.reload();
                             }
                         });
-                        // /LOADD
-
-
-
-                        // GASS
-
-
-
-
                     });
-
-
-
-
 
                     Instascan.Camera.getCameras().then(function(cameras) {
 
@@ -210,7 +195,9 @@
                     function redirect() {
                         window.location.href = "<?php echo base_url() ?>index.php/scan/update_hadir";
                     }
-                </script> -->
+                </script>
+
+                <!-- ___________________________________________________________________________________________________ -->
 
                 <!-- SCRIPT ANYARRR -->
                 <script type="text/javascript">
@@ -220,15 +207,17 @@
                         mirror: false
                     });
                     scanner.addListener('scan', function(content) {
-                        alert("Proses Verifikasi Data Tekan OK Untuk melanjutkan");
                         $('#qrcode').val(content);
-
-                        // document.querySelector("input[type='submit']").click();
-                        $("#verifikasi").click();
+                        document.querySelector("form").addEventListener("submit", function(evt) {
+                            evt.preventDefault();
+                            alert("You triggered the click event of the button!");
+                        });
 
                         // Just call the .click method of the button
+                        document.querySelector("input[type='submit']").click();
                         // alert(content);
                         // window.location.href = content;
+                        // window.location.href = "<?= base_url('scan/update_hadir') ?>";
                     });
                     Instascan.Camera.getCameras().then(function(cameras) {
                         if (cameras.length > 0) {
@@ -259,39 +248,6 @@
                 </script>
                 <!-- END ANYAR -->
 
-                <script>
-                    $("#verifikasi").click(function() {
-
-                        var qrcode = $("#qrcode").val();
-                        var event_id = $("#event_id").val();
-                        // var email = $("#email").val();
-                        // var message = $("#message").val();
-
-                        if (qrcode == '' || event_id == '') {
-                            alert("Please fill all fields.");
-                            return false;
-                        }
-
-                        $.ajax({
-                            type: "POST",
-                            url: <?= base_url('scan/update_hadir') ?>,
-                            data: {
-                                qrcode: qrcode,
-                                event_id: event_id,
-                                status_kehadiran: "HADIR",
-                                waktu_kehadiran: date("Y-m-d H:i:s")
-                            },
-                            cache: false,
-                            success: function(data) {
-                                alert(data);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr);
-                            }
-                        });
-
-                    });
-                </script>
                 <hr>
                 <div class="row">
                     <div class="col">

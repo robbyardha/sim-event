@@ -59,11 +59,28 @@ class Scan extends CI_Controller
         // ini_set("xdebug.var_display_max_depth", '-1');
         // var_dump($this->db->last_query($data['joinhadirevent']));
         // die;
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('content/scan/kehadiran', $data);
-        $this->load->view('layout/footer', $data);
+
+        $this->form_validation->set_rules(
+            'qrcode',
+            'qrcode',
+            'required',
+            [
+                'required' => "Field tidak boleh kosong"
+            ]
+        );
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/navbar', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('content/scan/kehadiran', $data);
+            $this->load->view('layout/footer', $data);
+        } else {
+            $event_id = htmlspecialchars($this->input->post('event_id'));
+            $this->Scan_model->update_hadir();
+            $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
+            redirect('scan/kehadiran/' . $event_id);
+            // base_url('scan/kehadiran/' . $event_id);
+        }
     }
 
     public function update_hadir()
