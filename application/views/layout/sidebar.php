@@ -58,10 +58,10 @@
                  </a>
                  <ul class="nav-menu menu-collapse">
 
-                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Kehadiran" || $this->uri->segment(1) == "kehadiran") {
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(2) == "Emergency" || $this->uri->segment(2) == "emergency") {
                                                                 echo "active";
                                                             } ?> ">
-                         <a href="<?= base_url('kehadiran') ?>">Kehadiran</a>
+                         <a href="<?= base_url('scan/emergency') ?>">Kehadiran Darurat</a>
                      </li>
                      <li class="nav-menu-item router-link-<?php if ($this->uri->segment(1) == "Scan" || $this->uri->segment(1) == "scan") {
                                                                 echo "active";

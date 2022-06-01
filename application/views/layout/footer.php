@@ -153,6 +153,38 @@
     });
 </script>
 
+<script>
+    $('.form-absen').on('click', function() {
+        event.preventDefault();
+        const abNomor = $(this).data('absenid');
+        $.ajax({
+            url: "<?= base_url('absensi/absen'); ?>",
+            type: 'post',
+            data: {
+                abNomor: abNomor,
+            },
+            success: function() {
+                document.location.href = "<?= base_url('absensi/'); ?>"
+            }
+        })
+    })
+    $('.form-batal').on('click', function() {
+        event.preventDefault();
+        const abNomor = $(this).data('absenid');
+        $.ajax({
+            url: "<?= base_url('absensi/batal'); ?>",
+            type: 'post',
+            data: {
+                abNomor: abNomor,
+            },
+            success: function() {
+                document.location.href = "<?= base_url('absensi/'); ?>"
+            }
+        })
+    })
+</script>
+
+
 </body>
 
 </html>

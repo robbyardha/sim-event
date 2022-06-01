@@ -89,4 +89,46 @@ class Scan extends CI_Controller
         $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
         redirect('scan/kehadiran');
     }
+
+    public function emergency()
+    {
+        $data['title'] = "Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
+
+        // var_dump($data['event']);
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/emergency/index', $data);
+        $this->load->view('layout/footer', $data);
+    }
+    public function emergencydetail($id)
+    {
+        $data['title'] = "Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        $data['eventid'] = $this->Event_model->getByid($id);
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/emergency/detail', $data);
+        $this->load->view('layout/footer', $data);
+    }
+
+    public function absen()
+    {
+        $this->scan_model->lakukanAbsen();
+        var_dump($this->db->last_query());
+    }
+    public function batal()
+    {
+        $this->scan_model->lakukanBatal();
+        var_dump($this->db->last_query());
+    }
 }

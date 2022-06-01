@@ -42,4 +42,31 @@ class Scan_model extends CI_Model
         $result = $this->db->get();
         return $result->result_array();
     }
+
+    public function lakukanAbsen()
+    {
+        $offset = 7 * 60 * 60;
+
+
+        $data = [
+            "ab_waktu" => gmdate('Y-m-d H:i:s', time() + $offset)
+        ];
+
+
+        $this->db->where('ab_nomor', $this->input->post('abNomor'));
+        $this->db->update('tb_absen', $data);
+    }
+
+    public function lakukanBatal()
+    {
+
+
+        $data = [
+            "ab_waktu" => '0000-00-00 00:00:00'
+        ];
+
+
+        $this->db->where('ab_nomor', $this->input->post('abNomor'));
+        $this->db->update('tb_absen', $data);
+    }
 }

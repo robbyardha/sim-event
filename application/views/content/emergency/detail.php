@@ -1,0 +1,220 @@
+<div class="content">
+    <div class="main">
+        <div class="page-header">
+            <h4 class="page-title">Kehadiran Darurat</h4>
+            <div class="breadcrumb">
+                <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
+                <div class="breadcrumb-item"><a href="index.html"> Home </a></div>
+                <div class="breadcrumb-item"><a href="#"> Kehadiran Darurat </a></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <?php if ($this->session->flashdata('message')) : ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Data Telah berhasil <strong><?= $this->session->flashdata('message') ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
+                <div class="container">
+                    <h4>Data Kehadiran Darurat <?= $eventid['nama_event'] ?></h4>
+                    <div class="row">
+                    </div>
+                    <div class="mt-4">
+                        <table id="data-table" class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Event</th>
+                                    <th>Tanggal Event</th>
+                                    <th>Waktu Event</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Action</th>
+                                    <th>Action</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1 ?>
+                                <?php foreach ($event as $ev) : ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $ev['nama_event'] ?></td>
+                                        <td><?= $ev['tanggal_awal'] ?> - <?= $ev['tanggal_akhir'] ?></td>
+                                        <td><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></td>
+                                        <td><?= $ev['penyelenggara'] ?></td>
+                                        <td>
+
+                                            <a href="<?= base_url('event/edit/') ?><?= $ev['id'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                            <a data-bs-toggle="modal" data-bs-target="#hapus_event<?= $ev['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+
+                                        </td>
+                                        <td>
+                                            <?php if ($a['ab_waktu'] != '0000-00-00 00:00:00') : ?>
+                                                <?= $a['ab_waktu'] ?> &nbsp;&nbsp;&nbsp;
+                                                <button class="btn btn-danger form-batal" data-absenid="<?= $a['ab_nomor'] ?>">BATAL</button>
+                                            <?php else : ?>
+                                                <button class="btn btn-primary form-absen" data-absenid="<?= $a['ab_nomor'] ?>">HADIR</button>
+                                            <?php endif ?>
+                                        </td>
+
+                                        <td>
+                                            <?php if ($a['ab_waktu'] > '0000-00-00 00:00:00') {
+                                                echo "Hadir";
+                                            } else {
+                                                echo "Tidak hadir";
+                                            } ?>
+                                        </td>
+                                    </tr>
+
+                                    <!-- MODAL HAPUS EVENT -->
+                                    <div class="modal fade" id="hapus_event<?= $ev['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Event</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form class="form-horizontal" method="POST" action="<?= base_url('event/hapus')  ?>">
+                                                    <div class="modal-body">
+                                                        <div class="modal-body">
+                                                            <p>Anda yakin akan menghapus <b><?= $ev['nama_event']; ?></b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="id" value="<?= $ev['id']; ?>">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                <?php endforeach ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Event</th>
+                                    <th>Tanggal Event</th>
+                                    <th>Waktu Event</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="code-example">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <?php if ($this->session->flashdata('message')) : ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Data Telah berhasil <strong><?= $this->session->flashdata('message') ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif ?>
+                <div class="container">
+                    <h4>Data Kehadiran Darurat <?= $eventid['nama_event'] ?></h4>
+                    <div class="row">
+                    </div>
+                    <div class="mt-4">
+                        <table id="data-table" class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Event</th>
+                                    <th>Tanggal Event</th>
+                                    <th>Waktu Event</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1 ?>
+                                <?php foreach ($event as $ev) : ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $ev['nama_event'] ?></td>
+                                        <td><?= $ev['tanggal_awal'] ?> - <?= $ev['tanggal_akhir'] ?></td>
+                                        <td><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></td>
+                                        <td><?= $ev['penyelenggara'] ?></td>
+                                        <td>
+
+                                            <a href="<?= base_url('event/edit/') ?><?= $ev['id'] ?>" class="btn btn-sm btn-success">Edit</a>
+                                            <a data-bs-toggle="modal" data-bs-target="#hapus_event<?= $ev['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+
+                                        </td>
+                                    </tr>
+
+                                    <!-- MODAL HAPUS EVENT -->
+                                    <div class="modal fade" id="hapus_event<?= $ev['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Event</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form class="form-horizontal" method="POST" action="<?= base_url('event/hapus')  ?>">
+                                                    <div class="modal-body">
+                                                        <div class="modal-body">
+                                                            <p>Anda yakin akan menghapus <b><?= $ev['nama_event']; ?></b></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="id" value="<?= $ev['id']; ?>">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                <?php endforeach ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Event</th>
+                                    <th>Tanggal Event</th>
+                                    <th>Waktu Event</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="code-example">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Content END -->
+
+        <!-- <script>
+    $('#range').daterangepicker({
+        "startDate": "05/13/2022",
+        "endDate": "05/19/2022"
+    }, function(start, end, label) {
+        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+
+    var today = new Date();
+
+    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+    alert(date);
+    $('#tgl').data('daterangepicker').setStartDate('03/01/2014');
+</script> -->
