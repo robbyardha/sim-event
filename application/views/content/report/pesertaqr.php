@@ -26,7 +26,7 @@
                 <td><?= $je['asal'] ?> </td>
                 <td><?= $je['no_tlp'] ?> </td>
                 <td>
-                    <img width="155" src="<?= base_url('/assets/dataqr/') . $je['qr_img'] ?>" alt="" srcset="">
+                    <img width="225" src="<?= base_url('/assets/dataqr/') . $je['qr_img'] ?>" alt="" srcset="">
 
                 </td>
 
