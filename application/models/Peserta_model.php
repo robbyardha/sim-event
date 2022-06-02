@@ -191,7 +191,7 @@ class Peserta_model extends CI_Model
 
                 $params['data'] = $uuidpeserta; //data yang akan di jadikan QR CODE
                 $params['level'] = 'H'; //H=High
-                $params['size'] = 10;
+                $params['size'] = 1024;
                 $params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
 
                 // fungsi untuk generate QR CODE
@@ -241,28 +241,55 @@ class Peserta_model extends CI_Model
                 $this->db->like('nama_event', $sheetData[$i][2]);
                 $query = $this->db->get('event');
                 $resulteventq = $query->result_array();
+                // var_dump($resultuserq);
+                // die;
 
-                foreach ($resultuserq as $newus) {
-                    if ($sheetData[$i][1] == $newus['nama']) {
-                        foreach ($resulteventq as $newev) {
-                            if ($sheetData[$i][2] == $newev['nama_event']) {
-                                $dataBuffer = [
-                                    // 'id' => $sheetData[$i][0],
-                                    'uuid' => $uuidpeserta++,
-                                    'users_id' => $newus['id'],
-                                    'event_id' => $newev['id'],
-                                    'tanggal_daftar' => date("Y-m-d H:i:s"),
-                                    'nama' => $sheetData[$i][1],
-                                    'asal' => $sheetData[$i][3],
-                                    'no_tlp' => $sheetData[$i][4],
-                                    'qr_img' => $image_name,
-                                ];
-                            }
-                        }
-                    } else {
-                        redirect('peserta');
-                    }
+                if ($sheetData[$i][1] == $missdata && $sheetData[$i][2] == $missdata && $sheetData[$i][3] == $missdata && $sheetData[$i][4] == $missdata && $sheetData[$i][5] == $missdata && $sheetData[$i][6] == $missdata) {
+                    $this->session->set_flashdata('message', 'Data Gagal Diimport Terdapat data kosong!. Pastikan data telah valid dan terisi jika kosong gunakan NULL');
+                    redirect('users');
                 }
+                $dataBuffer = [
+                    // 'id' => $sheetData[$i][0],
+                    'uuid' => $uuidpeserta++,
+                    'users_id' => $sheetData[$i][5],
+                    'event_id' => $sheetData[$i][6],
+                    'tanggal_daftar' => date("Y-m-d H:i:s"),
+                    'nama' => $sheetData[$i][1],
+                    'asal' => $sheetData[$i][3],
+                    'no_tlp' => $sheetData[$i][4],
+                    'qr_img' => $image_name,
+                ];
+                array_push($data, $dataBuffer);
+
+
+
+                // foreach ($resultuserq as $newus) {
+                //     if ($sheetData[$i][1] == $newus['nama']) {
+                //         foreach ($resulteventq as $newev) {
+                //             if ($sheetData[$i][2] == $newev['nama_event']) {
+                //                 $dataBuffer = [
+                //                     // 'id' => $sheetData[$i][0],
+                //                     'uuid' => $uuidpeserta++,
+                //                     'users_id' => $newus['id'],
+                //                     'event_id' => $newev['id'],
+                //                     'tanggal_daftar' => date("Y-m-d H:i:s"),
+                //                     'nama' => $sheetData[$i][1],
+                //                     'asal' => $sheetData[$i][3],
+                //                     'no_tlp' => $sheetData[$i][4],
+                //                     'qr_img' => $image_name,
+                //                 ];
+                //                 // var_dump($dataBuffer);
+                //             }
+                //             $this->session->set_flashdata('message', 'Nama Event Tidak Sesuai');
+                //             redirect('peserta');
+                //         }
+                //     } else {
+                //         // var_dump($this->db->last_query());
+                //         // die;
+                //         $this->session->set_flashdata('message', 'Nama Tidak Sesuai');
+                //         redirect('peserta');
+                //     }
+                // }
 
                 // die;
                 // JOIN DATA QUERY
@@ -298,10 +325,11 @@ class Peserta_model extends CI_Model
                 //     'no_tlp' => $sheetData[$i][4],
                 //     'qr_img' => $image_name,
                 // ];
-                array_push($data, $dataBuffer);
+                // array_push($data, $dataBuffer);
             }
-            // die;
             $this->db->insert_batch('peserta_event', $data);
+            // var_dump($this->db->last_query());
+            // die;
             $this->session->set_flashdata('message', 'Data berhasil Diimport');
             redirect('peserta');
         }
