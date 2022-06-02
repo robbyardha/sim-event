@@ -18,7 +18,7 @@ class Scan_model extends CI_Model
         $this->db->select("event.id, event.nama_event, event.deskripsi_event, event.tanggal_awal, event.tanggal_akhir, event.waktu_mulai, event.waktu_berakhir, event.penyelenggara, peserta_event.id, peserta_event.uuid, peserta_event.nama, peserta_event.asal, peserta_event.no_tlp, peserta_event.qr_img ");
         $this->db->from("peserta_event");
         $this->db->join("event", "event.id = peserta_event.event_id");
-        $this->db->limit(1111, 1110);
+        // $this->db->limit(1111, 1110);
         // $this->db->limit(1407, 1111);
         $result = $this->db->get();
         return $result->result_array();
