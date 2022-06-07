@@ -96,6 +96,7 @@ class Scan extends CI_Controller
         $data['myuser'] = $this->Users_model->getSessUser();
         $data['event'] = $this->Event_model->getAll();
         $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['user'] = $this->Users_model->getAll();
         $data['joineventpeserta'] = $this->Peserta_model->joinWithEvent();
 
         // var_dump($data['event']);
@@ -108,17 +109,89 @@ class Scan extends CI_Controller
     }
     public function emergencydetail($id)
     {
-        $data['title'] = "Kehadiran - SIM Event";
-        $data['myuser'] = $this->Users_model->getSessUser();
-        $data['event'] = $this->Event_model->getAll();
-        $data['eventid'] = $this->Event_model->getByid($id);
-        $data['peserta'] = $this->Peserta_model->getAlldata();
-        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
-        $this->load->view('layout/header', $data);
-        $this->load->view('layout/navbar', $data);
-        $this->load->view('layout/sidebar', $data);
-        $this->load->view('content/emergency/detail', $data);
-        $this->load->view('layout/footer', $data);
+        $this->form_validation->set_rules(
+            'event_id',
+            'Event',
+            'required',
+            [
+                'required' => 'Field ini tidak boleh kosong'
+            ]
+        );
+        $this->form_validation->set_rules(
+            'pilihpeserta',
+            'Peserta',
+            'required',
+            [
+                'required' => 'Field ini tidak boleh kosong'
+            ]
+        );
+        $this->form_validation->set_rules(
+            'uuid',
+            'UUID',
+            'required',
+            [
+                'required' => 'Field ini tidak boleh kosong'
+            ]
+        );
+        $this->form_validation->set_rules(
+            'nama',
+            'Nama',
+            'required',
+            [
+                'required' => 'Field ini tidak boleh kosong'
+            ]
+        );
+        $this->form_validation->set_rules(
+            'status',
+            'Status',
+            'required',
+            [
+                'required' => 'Field ini tidak boleh kosong'
+            ]
+        );
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "Kehadiran - SIM Event";
+            $data['myuser'] = $this->Users_model->getSessUser();
+            $data['event'] = $this->Event_model->getAll();
+            $data['eventid'] = $this->Event_model->getByid($id);
+            $data['peserta'] = $this->Peserta_model->getAlldata();
+            // var_dump($data['peserta']);
+            // die;
+            $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
+            $data['user'] = $this->Users_model->getAll();
+            $this->load->view('layout/header', $data);
+            $this->load->view('layout/navbar', $data);
+            $this->load->view('layout/sidebar', $data);
+            $this->load->view('content/emergency/detail', $data);
+            $this->load->view('layout/footer', $data);
+        } else {
+            $this->Scan_model->hadirEmergency();
+            $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
+            redirect('scan/emergency');
+        }
+    }
+
+    public function getPesertaDetail()
+    {
+        // POST data
+        // $postData = $this->input->post('id');
+        // $postData = $this->input->post('id');
+        $id = $_GET['id'];
+        // $uuid = $_GET['uuid'];
+        $nama = $_GET['nama'];
+
+        $arr['id'] = $id;
+        // $arr['uuid'] = $uuid;
+        $arr['nama'] = $nama;
+
+        // get data
+        // $data = $this->Users_model->getUserDetail($postData);
+
+        // var_dump(json_encode($arr));
+        // die;
+        echo json_encode($arr);
+        // echo ($postData);
+        // var_dump(json_encode($data));
     }
 
     public function absen()

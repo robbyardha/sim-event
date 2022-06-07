@@ -71,4 +71,16 @@ class Scan_model extends CI_Model
         $this->db->where('ab_nomor', $this->input->post('abNomor'));
         $this->db->update('tb_absen', $data);
     }
+
+    public function hadirEmergency()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $data = [
+            'event_id' => htmlspecialchars($this->input->post('event_id')),
+            'peserta_event_id' => htmlspecialchars($this->input->post('uuid')),
+            'status_kehadiran' => htmlspecialchars($this->input->post('status')),
+            'waktu_kehadiran' => date("Y-m-d H:i:s"),
+        ];
+        $this->db->insert('kehadiran_event', $data);
+    }
 }

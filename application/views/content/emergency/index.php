@@ -16,8 +16,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php endif ?>
-                <h4>Pilih Event</h4>
-                <p>Pilih Event Kemudian Scan QR pada Event yang terpilih</p>
+                <h4>Pilih Event Untuk Input Peserta Kehadiran Darurat</h4>
+                <p>Pilih Event Input Nama Peserta untuk melakukan <b>Kehadiran Darurat</b></p>
                 <div class="container">
                     <div class="row">
                         <form method="POST" class="row g-3">
