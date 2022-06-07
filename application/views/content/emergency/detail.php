@@ -10,6 +10,7 @@
         </div>
         <div class="card">
             <div class="card-body">
+                <?= $this->session->flashdata('notifdanger') ?>
                 <?php if ($this->session->flashdata('message')) : ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         Data Telah berhasil <strong><?= $this->session->flashdata('message') ?></strong>

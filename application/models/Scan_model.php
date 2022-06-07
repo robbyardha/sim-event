@@ -72,9 +72,17 @@ class Scan_model extends CI_Model
         $this->db->update('tb_absen', $data);
     }
 
+    public function getHadirRow()
+    {
+        $this->db->like('peserta_event_id', $this->input->post('uuid'));
+        $result = $this->db->get('kehadiran_event');
+        return $result->row_array();
+    }
+
     public function hadirEmergency()
     {
         date_default_timezone_set('Asia/Jakarta');
+
         $data = [
             'event_id' => htmlspecialchars($this->input->post('event_id')),
             'peserta_event_id' => htmlspecialchars($this->input->post('uuid')),
@@ -82,5 +90,7 @@ class Scan_model extends CI_Model
             'waktu_kehadiran' => date("Y-m-d H:i:s"),
         ];
         $this->db->insert('kehadiran_event', $data);
+        // var_dump($this->db->last_query());
+        // die;
     }
 }

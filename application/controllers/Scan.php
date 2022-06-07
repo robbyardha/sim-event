@@ -75,10 +75,48 @@ class Scan extends CI_Controller
             $this->load->view('content/scan/kehadiran', $data);
             $this->load->view('layout/footer', $data);
         } else {
-            $event_id = htmlspecialchars($this->input->post('event_id'));
-            $this->Scan_model->update_hadir();
-            $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
-            redirect('scan/kehadiran/' . $event_id);
+
+            $gethadir = $this->Scan_model->getHadirRow();
+            // var_dump($gethadir);
+            // die;
+            if ($gethadir == NULL) {
+                if ($this->input->post('qrcode') == $gethadir['peserta_event_id']) {
+                    $event_id = htmlspecialchars($this->input->post('event_id'));
+                    // $this->session->set_flashdata('message', 'Data Peserta Telah Melakukan Absensi');
+                    $this->session->set_flashdata('notifdanger', '<div class="alert alert-danger" role="alert">
+                    Maaf Data Peserta Telah Melakukan Absensi </div>');
+                    redirect('scan/kehadiran/' . $event_id);
+                } else {
+                    $event_id = htmlspecialchars($this->input->post('event_id'));
+                    $this->Scan_model->update_hadir();
+                    $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
+                    redirect('scan/kehadiran/' . $event_id);
+                }
+            } else {
+                if ($this->input->post('qrcode') == $gethadir['peserta_event_id']) {
+                    $event_id = htmlspecialchars($this->input->post('event_id'));
+                    $this->session->set_flashdata('notifdanger', '<div class="alert alert-danger" role="alert">
+                    Maaf Data Peserta Telah Melakukan Absensi </div>');
+                    redirect('scan/kehadiran/' . $event_id);
+                } else {
+                    $event_id = htmlspecialchars($this->input->post('event_id'));
+                    $this->Scan_model->update_hadir();
+                    $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
+                    redirect('scan/kehadiran/' . $event_id);
+                }
+            }
+            // var_dump($this->db->last_query());
+            // die;
+            // $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
+            // redirect("scan/emergencydetail/$id");
+
+            // INI YANG LAMA
+            // $event_id = htmlspecialchars($this->input->post('event_id'));
+            // $this->Scan_model->update_hadir();
+            // $this->session->set_flashdata('message', 'Data telah diverifikasi Peserta Hadir');
+            // redirect('scan/kehadiran/' . $event_id);
+
+
             // base_url('scan/kehadiran/' . $event_id);
         }
     }
@@ -165,9 +203,34 @@ class Scan extends CI_Controller
             $this->load->view('content/emergency/detail', $data);
             $this->load->view('layout/footer', $data);
         } else {
-            $this->Scan_model->hadirEmergency();
-            $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
-            redirect('scan/emergency');
+            $gethadir = $this->Scan_model->getHadirRow();
+            // var_dump($gethadir);
+            // die;
+            if ($gethadir == NULL) {
+                if ($this->input->post('uuid') == $gethadir['peserta_event_id']) {
+                    $this->session->set_flashdata('notifdanger', '<div class="alert alert-danger" role="alert">
+                    Maaf Data Peserta Telah Melakukan Absensi </div>');
+                    redirect("scan/emergencydetail/$id");
+                } else {
+                    $this->Scan_model->hadirEmergency();
+                    $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
+                    redirect("scan/emergencydetail/$id");
+                }
+            } else {
+                if ($this->input->post('uuid') == $gethadir['peserta_event_id']) {
+                    $this->session->set_flashdata('notifdanger', '<div class="alert alert-danger" role="alert">
+                    Maaf Data Peserta Telah Melakukan Absensi </div>');
+                    redirect("scan/emergencydetail/$id");
+                } else {
+                    $this->Scan_model->hadirEmergency();
+                    $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
+                    redirect("scan/emergencydetail/$id");
+                }
+            }
+            // var_dump($this->db->last_query());
+            // die;
+            // $this->session->set_flashdata('message', 'Data Peserta Darurat Diinputkan');
+            // redirect("scan/emergencydetail/$id");
         }
     }
 
