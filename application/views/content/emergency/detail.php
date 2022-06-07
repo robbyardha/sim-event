@@ -190,53 +190,26 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Event</th>
-                                    <th>Tanggal Event</th>
-                                    <th>Waktu Event</th>
-                                    <th>Penyelenggara</th>
-                                    <th>Action</th>
+                                    <th>ID Peserta</th>
+                                    <th>Nama</th>
+                                    <th>Asal</th>
+                                    <th>No Tlp</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1 ?>
-                                <?php foreach ($event as $ev) : ?>
+                                <?php foreach ($joinhadirevent as $pes) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $ev['nama_event'] ?></td>
-                                        <td><?= $ev['tanggal_awal'] ?> - <?= $ev['tanggal_akhir'] ?></td>
-                                        <td><?= $ev['waktu_mulai'] ?> - <?= $ev['waktu_berakhir'] ?></td>
-                                        <td><?= $ev['penyelenggara'] ?></td>
-                                        <td>
-
-                                            <a href="<?= base_url('event/edit/') ?><?= $ev['id'] ?>" class="btn btn-sm btn-success">Edit</a>
-                                            <a data-bs-toggle="modal" data-bs-target="#hapus_event<?= $ev['id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
-
-                                        </td>
+                                        <td><?= $pes['uuid'] ?></td>
+                                        <td><?= $pes['nama'] ?></td>
+                                        <td><?= $pes['asal'] ?> </td>
+                                        <td><?= $pes['no_tlp'] ?></td>
+                                        <td><?= $pes['status_kehadiran'] ?></td>
                                     </tr>
 
                                     <!-- MODAL HAPUS EVENT -->
-                                    <div class="modal fade" id="hapus_event<?= $ev['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Event</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <form class="form-horizontal" method="POST" action="<?= base_url('event/hapus')  ?>">
-                                                    <div class="modal-body">
-                                                        <div class="modal-body">
-                                                            <p>Anda yakin akan menghapus <b><?= $ev['nama_event']; ?></b></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" name="id" value="<?= $ev['id']; ?>">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
 
 
                                 <?php endforeach ?>
@@ -244,11 +217,11 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Event</th>
-                                    <th>Tanggal Event</th>
-                                    <th>Waktu Event</th>
-                                    <th>Penyelenggara</th>
-                                    <th>Action</th>
+                                    <th>ID Peserta</th>
+                                    <th>Nama</th>
+                                    <th>Asal</th>
+                                    <th>No Tlp</th>
+                                    <th>Status</th>
                                 </tr>
                             </tfoot>
                         </table>
