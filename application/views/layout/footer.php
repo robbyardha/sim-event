@@ -89,6 +89,12 @@
 <!-- SELECT2 -->
 <script src="<?= base_url() ?>assets/vendors/select2/select2.js"></script>
 
+<!-- IMG LIGHT BOX -->
+<script src="<?= base_url() ?>assets/vendors//simplelightbox/simpleLightbox.js"></script>
+
+<!-- IMG LIGHT BOX ANDRE -->
+<!-- <link href="<?= base_url() ?>assets/vendors/simplelightbox-andre/simple-lightbox.min.js" rel="stylesheet"> -->
+
 <!-- DATATABLES -->
 <script src="<?= base_url() ?>assets/vendors/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
@@ -129,6 +135,7 @@
 
 <script>
     $('.data-table').DataTable({
+        responsive: true,
         'columnDefs': [{
             'orderable': false,
             'targets': 0
@@ -182,6 +189,11 @@
             }
         })
     })
+</script>
+
+
+<script>
+    $('.imageQR a').simpleLightbox();
 </script>
 
 

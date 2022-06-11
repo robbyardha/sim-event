@@ -30,6 +30,12 @@
     <!-- SELECT2 -->
     <link href="<?= base_url() ?>assets/vendors/select2/select2.css" rel="stylesheet">
 
+    <!-- IMG LIGHT BOX -->
+    <link href="<?= base_url() ?>assets/vendors/simplelightbox/simpleLightbox.css" rel="stylesheet">
+
+    <!-- IMG LIGHT BOX ANDRE -->
+    <!-- <link href="<?= base_url() ?>assets/vendors/simplelightbox-andre/simple-lightbox.min.css" rel="stylesheet"> -->
+
     <!-- INSTASCAN JS -->
     <script type="text/javascript" src="<?= base_url() ?>assets/vendors/instascan/instascan.min.js"></script>
 

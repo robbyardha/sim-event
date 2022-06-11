@@ -41,9 +41,15 @@
                                     <td><?= $activity['waktu_mulai'] ?> - <?= $activity['waktu_berakhir'] ?></td>
                                     <td><?= $activity['penyelenggara'] ?></td>
                                     <td>
-                                        <img width="155" src="<?= base_url('assets/dataqr/') . $activity['qr_img'] ?> " alt="" srcset="">
-                                    </td>
+                                        <!-- <img width="155" src="<?= base_url('assets/dataqr/') . $activity['qr_img'] ?> " alt="" srcset=""> -->
+                                        <!-- <a class="btn btn-primary btn-md" href="#qrshow">Lihat QR</a> -->
+                                        <div class="imageQR " id="qrshow">
+                                            <a href="<?= base_url("assets/dataqr/")  ?><?= $activity['qr_img'] ?> " title="My QR <?= $activity['qr_img'] ?>">
+                                                <img class="img-fluid" src="<?= base_url('assets/dataqr/') . $activity['qr_img'] ?> " alt="My QR <?= $activity['qr_img'] ?>" />
+                                            </a>
+                                        </div>
 
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
