@@ -25,9 +25,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Event</th>
-                                <th>Pelaksanaan</th>
-                                <th>Waktu</th>
-                                <th>Penyelenggara</th>
                                 <th>QR</th>
                             </tr>
                         </thead>
@@ -36,20 +33,25 @@
                             <?php foreach ($activityjoineventpeserta as $activity) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $activity['nama_event'] ?></td>
-                                    <td><?= date("d F Y", strtotime($activity['tanggal_awal'])) ?> - <?= date("d F Y", strtotime($activity['tanggal_akhir'])) ?> </td>
-                                    <td><?= $activity['waktu_mulai'] ?> - <?= $activity['waktu_berakhir'] ?></td>
-                                    <td><?= $activity['penyelenggara'] ?></td>
+                                    <td>
+                                        <?= $activity['nama_event'] ?>
+                                        <br>
+                                        <?= date("d F Y", strtotime($activity['tanggal_awal'])) ?> - <?= date("d F Y", strtotime($activity['tanggal_akhir'])) ?>
+                                        <br>
+                                        <?= $activity['waktu_mulai'] ?> - <?= $activity['waktu_berakhir'] ?>
+                                        <br>
+                                        <?= $activity['penyelenggara'] ?>
+                                    </td>
                                     <td>
                                         <!-- <img width="155" src="<?= base_url('assets/dataqr/') . $activity['qr_img'] ?> " alt="" srcset=""> -->
                                         <!-- <a class="btn btn-primary btn-md" href="#qrshow">Lihat QR</a> -->
                                         <div class="imageQR " id="qrshow">
-                                            <a href="<?= base_url("assets/dataqr/")  ?><?= $activity['qr_img'] ?> " title="My QR <?= $activity['qr_img'] ?>">
+                                            <a href="<?= base_url("assets/dataqr/")  ?><?= $activity['qr_img'] ?> " title="My QR <?= $activity['nama_event'] ?>  <?= $activity['qr_img'] ?>">
                                                 <img class="img-fluid" src="<?= base_url('assets/dataqr/') . $activity['qr_img'] ?> " alt="My QR <?= $activity['qr_img'] ?>" />
                                             </a>
                                         </div>
 
-                                    </td>
+                                        </>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -57,9 +59,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Event</th>
-                                <th>Pelaksanaan</th>
-                                <th>Waktu</th>
-                                <th>Penyelenggara</th>
                                 <th>QR</th>
                             </tr>
                         </tfoot>

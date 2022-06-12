@@ -85,6 +85,11 @@
                                                             } ?> ">
                          <a href="<?= base_url('report') ?>">Kehadiran Event</a>
                      </li>
+                     <li class="nav-menu-item router-link-<?php if ($this->uri->segment(2) == "byasal" || $this->uri->segment(2) == "Byasal") {
+                                                                echo "active";
+                                                            } ?> ">
+                         <a href="<?= base_url('report/byasal') ?>">By Asal</a>
+                     </li>
                      <li class="nav-menu-item router-link-<?php if ($this->uri->segment(2) == "dataqr" || $this->uri->segment(2) == "Dataqr") {
                                                                 echo "active";
                                                             } ?> ">

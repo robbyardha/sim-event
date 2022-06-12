@@ -142,6 +142,20 @@
         }]
     });
 </script>
+<script>
+    $('.data-table-report').DataTable({
+        responsive: true,
+        'columnDefs': [{
+            'orderable': false,
+            'targets': 0
+        }],
+        "aLengthMenu": [
+            [40, 50, 75, -1],
+            [40, 50, 75, "All"]
+        ],
+        "iDisplayLength": 40
+    });
+</script>
 
 <script>
     $(document).ready(function() {

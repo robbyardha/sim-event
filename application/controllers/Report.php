@@ -3,6 +3,7 @@
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Dompdf\Dompdf;
+use SebastianBergmann\Environment\Console;
 
 class Report extends CI_Controller
 {
@@ -15,6 +16,7 @@ class Report extends CI_Controller
         $this->load->model('Peserta_model');
         $this->load->model('Users_model');
         $this->load->model('Scan_model');
+        $this->load->model('Report_model');
 
         $this->load->library('Pdf');
 
@@ -230,5 +232,125 @@ class Report extends CI_Controller
         $this->pdf->filename = "Peserta QRCode.pdf";
         $this->pdf->load_view('content/report/pesertaqr', $data);
         $this->pdf->render();
+    }
+
+
+    public function byasal($keyword = null)
+    {
+        $data['title'] = "Report By Asal - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        // $data['eventid'] = $this->Event_model->getByid();
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        // $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent();
+
+        // var_dump($data['peserta']);
+        // die;
+
+        // FOR LONG LAST QUERY
+        // ini_set("xdebug.var_display_max_children", '-1');
+        // ini_set("xdebug.var_display_max_data", '-1');
+        // ini_set("xdebug.var_display_max_depth", '-1');
+        // var_dump($this->db->last_query($data['joinhadirevent']));
+        // die;
+
+        $data['keyword'] = null;
+        if ($this->input->post('keyword') != null) {
+            $keyword = $this->input->post('keyword');
+            $data['keyword'] =  $this->Scan_model->carikeyword($keyword);
+            // var_dump($data['keyword']);
+            // die;
+        } else {
+        }
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/report/byasalevent', $data);
+        $this->load->view('layout/footer', $data);
+    }
+
+    public function asalevent($id)
+    {
+        $data['title'] = "Laporan Kehadiran Event By Asal - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        $data['eventid'] = $this->Event_model->getByid($id);
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['pesertaasal'] = $this->Report_model->pesertaAsal();
+        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
+        $data['getpesertaasal'] = $this->Report_model->getAsalFromPeserta();
+        $data['showselect'] = $this->Report_model->getAsalFromPesertaWhereInput();
+        // var_dump($data['getpesertaasal']);
+        // var_dump($this->input->get('selectasal'));
+        // die;
+
+        // FOR LONG LAST QUERY
+        // ini_set("xdebug.var_display_max_children", '-1');
+        // ini_set("xdebug.var_display_max_data", '-1');
+        // ini_set("xdebug.var_display_max_depth", '-1');
+        // var_dump($this->db->last_query($data['input']));
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/report/kehadiranbyeventasal', $data);
+        $this->load->view('layout/footer', $data);
+    }
+
+    public function exportpdfasalevent($id)
+    {
+
+        $data['title'] = "Report Kehadiran - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        $data['eventid'] = $this->Event_model->getByid($id);
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['pesertaasal'] = $this->Report_model->pesertaAsal();
+        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
+        $data['getpesertaasal'] = $this->Report_model->getAsalFromPeserta();
+        $data['showselect'] = $this->Report_model->getAsalFromPesertaWhereInput();
+        $metget = $this->input->get('selectasal');
+        // var_dump($data['showselect']);
+        // die;
+
+        // FOR LONG LAST QUERY
+        // ini_set("xdebug.var_display_max_children", '-1');
+        // ini_set("xdebug.var_display_max_data", '-1');
+        // ini_set("xdebug.var_display_max_depth", '-1');
+        // var_dump($this->db->last_query($data['joinhadirevent']));
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/footer');
+        // $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->setPaper('A4', 'landscape');
+        $this->pdf->filename = "Laporan Kehadiran Event $metget.pdf";
+        $this->pdf->load_view('content/report/laporan_kehadiran_byasal', $data);
+    }
+
+    public function asalname($id)
+    {
+        $data['title'] = "Laporan Kehadiran Event By Asal - SIM Event";
+        $data['myuser'] = $this->Users_model->getSessUser();
+        $data['event'] = $this->Event_model->getAll();
+        $data['eventid'] = $this->Event_model->getByid($id);
+        $data['peserta'] = $this->Peserta_model->getAlldata();
+        $data['joinhadirevent'] = $this->Scan_model->joinDataHadirWithEvent($id);
+        $data['getpesertaasal'] = $this->Report_model->getAsalFromPeserta();
+        $data['input'] = $this->Report_model->getAsalFromPesertaWhereInput();
+        // var_dump($data['getpesertaasal']);
+        // die;
+
+        // FOR LONG LAST QUERY
+        // ini_set("xdebug.var_display_max_children", '-1');
+        // ini_set("xdebug.var_display_max_data", '-1');
+        // ini_set("xdebug.var_display_max_depth", '-1');
+        // var_dump($this->db->last_query($data['joinhadirevent']));
+        // die;
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('content/report/kehadiranbyeventasalname', $data);
+        $this->load->view('layout/footer', $data);
     }
 }
